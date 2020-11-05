@@ -11,7 +11,7 @@ namespace PersonalDevelopment
 {
     public class MainMenuUserInterfaceManager: MonoBehaviour
     {
-        private readonly IStateManager _stateManager = new StateManager();
+        private readonly IStateManager _stateManager = StateManager.Instance;
 
         [SerializeField] private StartScreenBehaviour _startScreen = null;
         [SerializeField] private PlayerJoinScreenBehaviour _playerJoinScreen = null;

@@ -5,12 +5,25 @@ namespace Tests
 {
     public class StateManagerTests
     {
+        [SetUp]
+        protected void Setup()
+        {
+            StateManager.Instance.SetState(State.StartMenu);
+        }
+
+        [Test]
+        public void TestOnApplicationStartState()
+        {
+            //Assert
+            Assert.AreEqual(StateManager.Instance.GetState(), State.StartMenu, "State should start as Start Menu");
+        }
+        
         // A Test behaves as an ordinary method
         [Test]
         public void TestStateManagerChangeStateToPlay()
         {
             // Arrange
-            var stateManager = new StateManager();
+            var stateManager = StateManager.Instance;
             
             //Act
             stateManager.SetState(State.Play);
@@ -25,8 +38,8 @@ namespace Tests
         public void TestStateManagerStateTheSameWithDifferentObjects()
         {
             // Arrange
-            var stateManager_1 = new StateManager();
-            var stateManager_2 = new StateManager();
+            var stateManager_1 = StateManager.Instance;
+            var stateManager_2 = StateManager.Instance;
             
             //Act
             stateManager_2.SetState(State.PreGame);
@@ -47,7 +60,7 @@ namespace Tests
                 result++;
             }
 
-            var stateManager = new StateManager();
+            var stateManager = StateManager.Instance;
             stateManager.OnStateChanged += OnStateChanged;
 
             //Act
@@ -67,7 +80,7 @@ namespace Tests
                 resultingState = state;
             }
 
-            var stateManager = new StateManager();
+            var stateManager = StateManager.Instance;
             stateManager.OnStateChanged += OnStateChanged;
 
             //Act
@@ -75,6 +88,27 @@ namespace Tests
 
             //Assert
             Assert.AreEqual(resultingState, State.Play, "Resulting state should be Play");
+        }
+        
+        [Test]
+        public void TestStateManagerCallsBackOnStateChangeFromAnotherStateManagerObject()
+        {
+            //Arrange
+            var result = 0;
+            void OnStateChanged(State state)
+            {
+                result++;
+            }
+
+            var stateManager = StateManager.Instance;
+            var stateManagerOther = StateManager.Instance;
+            stateManager.OnStateChanged += OnStateChanged;
+
+            //Act
+            stateManagerOther.SetState(State.Play);
+
+            //Assert
+            Assert.AreEqual(result, 1, "Result should be 1, since callback adds 1");
         }
 
         

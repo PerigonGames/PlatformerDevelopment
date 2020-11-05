@@ -25,11 +25,22 @@ namespace PersonalDevelopment
         void SetState(State state);
     }
     
-    public class StateManager: IStateManager
+    public class StateManager : IStateManager 
     {
-        private static State _gameState = State.StartMenu;
+        private static readonly StateManager _instance = new StateManager();
         
+        private State _gameState = State.StartMenu;
         public event Action<State> OnStateChanged;
+
+        static StateManager()
+        {
+        }
+
+        private StateManager()
+        {
+        }
+
+        public static StateManager Instance => _instance;
 
         /// <summary>
         /// Sets the state of the application
