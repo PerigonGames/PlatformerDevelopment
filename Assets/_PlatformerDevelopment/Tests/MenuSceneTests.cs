@@ -50,5 +50,26 @@ namespace Tests
             
             SnapshotVerifyView();
         }
+        
+        [UnityTest]
+        public IEnumerator TestMenuSnapShotOnEndGameStateNothingChanges()
+        {
+            // Wait for 4 frames
+            for (int i = 0; i < 4; i++)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            
+            var stateManager = StateManager.Instance;
+            stateManager.SetState(State.EndGame);
+
+            // Wait for 4 frames
+            for (int i = 0; i < 4; i++)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            
+            SnapshotVerifyView();
+        }
     }
 }

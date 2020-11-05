@@ -30,7 +30,11 @@ namespace PersonalDevelopment
 
         private void OnStateChange(State state)
         {
-            bool isStartScreenActive = state == State.StartMenu;
+            bool isStartScreenActive = true;
+            if (state == State.StartMenu)
+            {
+                isStartScreenActive = true;
+            }
 
             if (state == State.CharacterSelection)
             {
