@@ -17,7 +17,23 @@ namespace Tests
             base.Setup();
             SceneManager.LoadScene("Menu");
         }
-        
+
+        [UnityTest]
+        public IEnumerator TestMenuSceneScreens()
+        {
+            // Wait for 4 frames
+            for (int i = 0; i < 4; i++)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            var startScreen = GameObject.FindObjectOfType(typeof(StartScreenBehaviour));
+            var userInterfaceManager = GameObject.FindObjectOfType(typeof(MainMenuUserInterfaceManager));
+
+            Assert.NotNull(startScreen, "Start screen should be in scene");
+            Assert.NotNull(userInterfaceManager, "UI Manager should be on in the scene");
+        }
+
         [UnityTest]
         public IEnumerator TestMenuSnapShotOnStart()
         {
