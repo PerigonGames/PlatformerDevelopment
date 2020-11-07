@@ -4,35 +4,96 @@ using UnityEngine.InputSystem;
 
 namespace PersonalDevelopment
 {
+    [RequireComponent(typeof(PlayerInput))]
+    [RequireComponent(typeof(Rigidbody))]
     public class PlayerMovementBehaviour : MonoBehaviour
     {
+        // Managers
+        private IStateManager _stateManager = null;
+        
+        // Components
         private PlayerCharacterBindings _bindings = null;
+        private Rigidbody _rigidbody = null;
+        
+        // Movement 
+        [SerializeField] private float _movementSpeed = 5f;
+        private Vector2 Axis2D
+        {
+            get;
+            set;
+        }
 
+        public void Initialize(IStateManager stateManager = null)
+        {
+            if (stateManager == null) 
+            {
+                _stateManager = StateManager.Instance;
+            }
+            else
+            {
+                _stateManager = stateManager;
+            }
+            
+            _stateManager.SetState(State.Play);
+        }
+        
+#region mono
         // Start is called before the first frame update
+        private void Awake()
+        {
+            // This will never be null, since this won't even compile without RigidBody on this gameobject
+            _rigidbody = GetComponent<Rigidbody>();
+            _bindings = new PlayerCharacterBindings();
+        }
+
+        private void Start()
+        {
+            Initialize();
+        }
+
         void OnEnable()
         {
-            _bindings = new PlayerCharacterBindings();
+            _bindings.Player.Move.performed += OnMovePressed;
+            _bindings.Player.Move.canceled += OnMoveCancelled;
             _bindings.Enable();
         }
 
         private void OnDisable()
         {
+            _bindings.Player.Move.performed -= OnMovePressed;
+            _bindings.Player.Move.canceled -= OnMoveCancelled;
             _bindings.Disable();
         }
 
-        public void OnMove(InputAction.CallbackContext context)
+        private void FixedUpdate()
         {
-            print("On Move Pressed");
+            if (_stateManager.GetState() == State.Play)
+            {
+                Movement();
+            }
         }
 
-        public void OnFire(InputAction.CallbackContext context)
+        #endregion
+        
+        #region Movement
+
+        private void Movement()
         {
-            print("On Fire");
+            var movement = new Vector3(Axis2D.x, 0 ,0) * _movementSpeed * Time.fixedDeltaTime;
+            _rigidbody.MovePosition(transform.position + movement);
+        }
+        #endregion
+        
+        #region Delegate
+        private void OnMovePressed(InputAction.CallbackContext context)
+        {
+            Axis2D = context.ReadValue<Vector2>();
         }
 
-        public void OnMelee(InputAction.CallbackContext context)
+        private void OnMoveCancelled(InputAction.CallbackContext context)
         {
-            print("On Melee");
+            Axis2D = Vector3.zero;
         }
+        #endregion
     }
 }
