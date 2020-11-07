@@ -1,8 +1,7 @@
 {
-    "name": "Scripts",
+    "name": "PlayerCharacterBindings",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:c87a9224f6e0440669fafb4353bae114"
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
