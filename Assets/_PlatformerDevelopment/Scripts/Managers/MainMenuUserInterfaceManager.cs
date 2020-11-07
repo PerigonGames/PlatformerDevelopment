@@ -18,8 +18,12 @@ namespace PersonalDevelopment
         
         private void CleanUp()
         {
-            _startScreen.CleanUp();
-            _startScreen.OnButtonPressed -= OnStartButtonPressed;
+            if (_startScreen)
+            {
+                _startScreen.CleanUp();
+                _startScreen.OnButtonPressed -= OnStartButtonPressed;
+            }
+
             _stateManager.OnStateChanged -= OnStateChange;
         }
 
@@ -40,16 +44,26 @@ namespace PersonalDevelopment
             {
                 isStartScreenActive = false;
             }
-            
-            _startScreen.gameObject.SetActive(isStartScreenActive);
-            _playerJoinScreen.gameObject.SetActive(!isStartScreenActive);
+
+            if (_startScreen)
+            {
+                _startScreen.gameObject.SetActive(isStartScreenActive);
+            }
+
+            if (_playerJoinScreen)
+            {
+                _playerJoinScreen.gameObject.SetActive(!isStartScreenActive);
+            }
         }
         
         #region Mono
         private void OnEnable()
         {
-            _startScreen.Initialize();
-            _startScreen.OnButtonPressed += OnStartButtonPressed;
+            if (_startScreen)
+            {
+                _startScreen.Initialize();
+                _startScreen.OnButtonPressed += OnStartButtonPressed;
+            }
             _stateManager.OnStateChanged += OnStateChange;
         }
         

@@ -12,18 +12,24 @@ namespace PersonalDevelopment
 
         public void Initialize()
         {
-            _startButton.onClick.AddListener(() =>
+            if (_startButton)
             {
-                if (OnButtonPressed != null)
+                _startButton.onClick.AddListener(() =>
                 {
-                    OnButtonPressed();
-                }
-            });
+                    if (OnButtonPressed != null)
+                    {
+                        OnButtonPressed();
+                    }
+                });
+            }
         }
 
         public void CleanUp()
         {
-            _startButton.onClick.RemoveAllListeners();
+            if (_startButton)
+            {
+                _startButton.onClick.RemoveAllListeners();
+            }
         }
     }
 }
