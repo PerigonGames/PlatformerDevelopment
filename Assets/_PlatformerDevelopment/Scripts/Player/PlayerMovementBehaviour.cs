@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace PersonalDevelopment
@@ -8,36 +7,16 @@ namespace PersonalDevelopment
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerMovementBehaviour : MonoBehaviour
     {
-        // Managers
-        private IStateManager _stateManager = null;
-        
         // Components
         private PlayerCharacterBindings _bindings = null;
         private Rigidbody _rigidbody = null;
         
         // Movement 
         [SerializeField] private float _movementSpeed = 5f;
-        private Vector2 Axis2D
-        {
-            get;
-            set;
-        }
+        private Vector2 Axis2D { get; set; }
 
-        public void Initialize(IStateManager stateManager = null)
-        {
-            if (stateManager == null) 
-            {
-                _stateManager = StateManager.Instance;
-            }
-            else
-            {
-                _stateManager = stateManager;
-            }
-            
-            _stateManager.SetState(State.Play);
-        }
+        #region mono
         
-#region mono
         // Start is called before the first frame update
         private void Awake()
         {
@@ -45,12 +24,7 @@ namespace PersonalDevelopment
             _rigidbody = GetComponent<Rigidbody>();
             _bindings = new PlayerCharacterBindings();
         }
-
-        private void Start()
-        {
-            Initialize();
-        }
-
+        
         void OnEnable()
         {
             _bindings.Player.Move.performed += OnMovePressed;
@@ -67,10 +41,7 @@ namespace PersonalDevelopment
 
         private void FixedUpdate()
         {
-            if (_stateManager.GetState() == State.Play)
-            {
-                Movement();
-            }
+            Movement();
         }
 
         #endregion
