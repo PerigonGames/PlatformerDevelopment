@@ -15,16 +15,8 @@ namespace Tests
         public override void Setup()
         {
             base.Setup();
-            Time.timeScale = 100;
             SceneManager.LoadScene("CharacterControl_Sandbox");
             keyboard = InputSystem.AddDevice<Keyboard>();
-        }
-
-        [TearDown]
-        public override void TearDown()
-        {
-            base.TearDown();
-            Time.timeScale = 0;
         }
 
         [UnityTest]
@@ -164,14 +156,17 @@ namespace Tests
             PressAndRelease(keyboard.upArrowKey);
             yield return new WaitForSeconds(0.25f);
             Press(keyboard.rightArrowKey);
-            yield return new WaitForSeconds(0.25f);
+            for (int i = 0; i < 100; i++)
+            {
+                yield return new WaitForEndOfFrame();
+            }
             Release(keyboard.rightArrowKey);
             yield return new WaitForSeconds(1f);
             
             //Then
             var after = player.gameObject.transform.position;
-            Assert.Greater(after.x, before.x, "Player should be on the platform");
-            Assert.Greater(after.y, before.y, "Player should be on the platform");
+            Assert.Greater(after.x, before.x, "Player X value should be on the platform");
+            Assert.Greater(after.y, before.y, "Player Y value should be on the platform");
         }
     }
 }

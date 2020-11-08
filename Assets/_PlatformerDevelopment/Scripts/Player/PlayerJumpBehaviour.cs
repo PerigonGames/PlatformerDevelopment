@@ -21,8 +21,7 @@ namespace PersonalDevelopment
 
         private void OnJumpPressed(InputAction.CallbackContext context)
         {
-            var pressedUp = context.ReadValue<Vector2>().y > 0;
-            if (_canJump && pressedUp)
+            if (_canJump)
             {
                 _canJump = false;
                 _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
@@ -40,13 +39,13 @@ namespace PersonalDevelopment
 
         private void OnEnable()
         {
-            _bindings.Player.Move.performed += OnJumpPressed;
+            _bindings.Player.Jump.performed += OnJumpPressed;
             _bindings.Enable();
         }
 
         private void OnDisable()
         {
-            _bindings.Player.Move.performed -= OnJumpPressed;
+            _bindings.Player.Jump.performed -= OnJumpPressed;
             _bindings.Disable();
         }
 
