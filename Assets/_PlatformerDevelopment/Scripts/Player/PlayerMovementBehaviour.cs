@@ -25,7 +25,7 @@ namespace PersonalDevelopment
             _bindings = new PlayerCharacterBindings();
         }
         
-        void OnEnable()
+        private void OnEnable()
         {
             _bindings.Player.Move.performed += OnMovePressed;
             _bindings.Player.Move.canceled += OnMoveCancelled;
