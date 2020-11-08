@@ -68,7 +68,7 @@ namespace Tests
         }
         
         [UnityTest]
-        public IEnumerator TestMenuSnapShotOnEndGameStateNothingChanges()
+        public IEnumerator TestMenuSnapShotOnEndGameStateHidesMenu()
         {
             // Wait for 4 frames
             for (int i = 0; i < 4; i++)

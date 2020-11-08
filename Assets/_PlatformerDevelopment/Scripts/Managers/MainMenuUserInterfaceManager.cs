@@ -34,7 +34,8 @@ namespace PersonalDevelopment
 
         private void OnStateChange(State state)
         {
-            bool isStartScreenActive = true;
+            bool isStartScreenActive = false;
+            bool isPlayerJoinActive = false;
             if (state == State.StartMenu)
             {
                 isStartScreenActive = true;
@@ -42,7 +43,7 @@ namespace PersonalDevelopment
 
             if (state == State.CharacterSelection)
             {
-                isStartScreenActive = false;
+                isPlayerJoinActive = true;
             }
 
             if (_startScreen)
@@ -52,7 +53,7 @@ namespace PersonalDevelopment
 
             if (_playerJoinScreen)
             {
-                _playerJoinScreen.gameObject.SetActive(!isStartScreenActive);
+                _playerJoinScreen.gameObject.SetActive(isPlayerJoinActive);
             }
         }
         
