@@ -9,33 +9,43 @@ namespace Tests
 {
     public class CharacterControlTests : InputTestFixture
     {
-        private Keyboard keyboard = null;
-        
+        private Keyboard _keyboard = null;
+
         [SetUp]
         public override void Setup()
         {
             base.Setup();
             SceneManager.LoadScene("CharacterControl_Sandbox");
-            keyboard = InputSystem.AddDevice<Keyboard>();
+            _keyboard = InputSystem.AddDevice<Keyboard>();
         }
 
         [UnityTest]
-        public IEnumerator TestCharacterControlSandboxStart()
+        public IEnumerator Test_Sandbox_Start()
+        {
+            Assert.IsNotNull(GameObject.FindGameObjectWithTag("Player"));
+            yield return null;
+        }
+        
+        [UnityTest]
+        public IEnumerator Test_Sandbox_PlayerInput_NotNull()
         {
             var player = GameObject.FindGameObjectWithTag("Player");
-            Assert.IsNotNull(player);
+            var input = player.GetComponent<PlayerInput>();
+            Assert.IsNotNull(input);
             yield return null;
         }
 
         [UnityTest]
-        public IEnumerator TestCharacterControlsPressingLeftArrowKeyGetsLowerXPosition()
+        public IEnumerator Test_PressLeftArrowKey_Lower_XPosition()
         {
             //Given
             var player = GameObject.FindGameObjectWithTag("Player");
+            var input = player.GetComponent<PlayerInput>();
+            input.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current);
             var before = player.gameObject.transform.position.x;
             
             //When
-            Press(keyboard.leftArrowKey);
+            Press(_keyboard.leftArrowKey);
             yield return new WaitForSeconds(0.5f);
             
             //Then
@@ -45,14 +55,16 @@ namespace Tests
         }
         
         [UnityTest]
-        public IEnumerator TestCharacterControlsPressingRightArrowKeyGetsHigherXPosition()
+        public IEnumerator Test_PressRightArrowKey_Higher_XPosition()
         {
             //Given 
             var player = GameObject.FindGameObjectWithTag("Player");
+            var input = player.GetComponent<PlayerInput>();
+            input.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current);
             var before = player.gameObject.transform.position.x;
             
             //When
-            Press(keyboard.rightArrowKey);
+            Press(_keyboard.rightArrowKey);
             yield return new WaitForSeconds(0.5f);
             
             //Then
@@ -62,14 +74,16 @@ namespace Tests
         }
         
         [UnityTest]
-        public IEnumerator TestCharacterControlsPressingDownArrowKeyGetsSameXPosition()
+        public IEnumerator Test_PressDownArrowKey_Equal_XPosition()
         {
             //Given 
             var player = GameObject.FindGameObjectWithTag("Player");
+            var input = player.GetComponent<PlayerInput>();
+            input.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current);
             var before = player.gameObject.transform.position.x;
             
             //When
-            Press(keyboard.upArrowKey);
+            Press(_keyboard.upArrowKey);
             yield return new WaitForSeconds(0.5f);
             
             //Then
@@ -79,14 +93,16 @@ namespace Tests
         }
         
         [UnityTest]
-        public IEnumerator TestCharacterControlsPressingUpArrowKeyGetsSameXPosition()
+        public IEnumerator Test_PressUpArrowKey_Equal_XPosition()
         {
             //Given 
             var player = GameObject.FindGameObjectWithTag("Player");
+            var input = player.GetComponent<PlayerInput>();
+            input.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current);
             var before = player.gameObject.transform.position.x;
             
             //When
-            Press(keyboard.downArrowKey);
+            Press(_keyboard.downArrowKey);
             yield return new WaitForSeconds(0.5f);
             
             //Then
@@ -96,14 +112,16 @@ namespace Tests
         }
         
         [UnityTest]
-        public IEnumerator TestCharacterControlsPressingUpArrowKeyDifferentYPosition()
+        public IEnumerator Test_PressUpArrowKey_Equal_YPosition()
         {
             //Given 
             var player = GameObject.FindGameObjectWithTag("Player");
+            var input = player.GetComponent<PlayerInput>();
+            input.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current);
             var before = player.gameObject.transform.position.x;
             
             //When
-            Press(keyboard.upArrowKey);
+            Press(_keyboard.upArrowKey);
             yield return new WaitForSeconds(0.5f);
             
             //Then
@@ -113,14 +131,16 @@ namespace Tests
         }
         
         [UnityTest]
-        public IEnumerator TestCharacterControlsPressingDownArrowKeySameYPosition()
+        public IEnumerator Test_PressDownArrowKey_Equal_YPosition()
         {
             //Given 
             var player = GameObject.FindGameObjectWithTag("Player");
+            var input = player.GetComponent<PlayerInput>();
+            input.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current);
             var before = player.gameObject.transform.position.y;
             
             //When
-            Press(keyboard.downArrowKey);
+            Press(_keyboard.downArrowKey);
             yield return new WaitForSeconds(0.5f);
             
             //Then
@@ -129,14 +149,34 @@ namespace Tests
         }
         
         [UnityTest]
-        public IEnumerator TestCharacterControlsPressingUpArrowKeyWaitFor2SecondsLandOnSamePosition()
+        public IEnumerator Test_PressUpArrowKey_Greater_YPosition()
         {
             //Given 
             var player = GameObject.FindGameObjectWithTag("Player");
+            var input = player.GetComponent<PlayerInput>();
+            input.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current);
+            var before = player.gameObject.transform.position.y;
+            
+            //When
+            Press(_keyboard.upArrowKey);
+            yield return new WaitForSeconds(0.5f);
+            
+            //Then
+            var after = player.gameObject.transform.position.y;
+            Assert.Greater(after, before, "Player should be in the same position since jump and land on same position");
+        }
+        
+        [UnityTest]
+        public IEnumerator Test_PressUpArrowKey_Wait2Seconds_Equal_Position()
+        {
+            //Given 
+            var player = GameObject.FindGameObjectWithTag("Player");
+            var input = player.GetComponent<PlayerInput>();
+            input.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current);
             var before = player.gameObject.transform.position;
             
             //When
-            Press(keyboard.upArrowKey);
+            Press(_keyboard.upArrowKey);
             yield return new WaitForSeconds(2f);
             
             //Then
@@ -146,21 +186,23 @@ namespace Tests
         
         
         [UnityTest]
-        public IEnumerator TestCharacterControlsPressUpAndRightToLandOnPlatform()
+        public IEnumerator Test_PressUpAndRight_On_Platform()
         {
             //Given 
             var player = GameObject.FindGameObjectWithTag("Player");
+            var input = player.GetComponent<PlayerInput>();
+            input.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current);
             var before = player.gameObject.transform.position;
             
             //When
-            PressAndRelease(keyboard.upArrowKey);
+            PressAndRelease(_keyboard.upArrowKey);
             yield return new WaitForSeconds(0.25f);
-            Press(keyboard.rightArrowKey);
+            Press(_keyboard.rightArrowKey);
             for (int i = 0; i < 100; i++)
             {
                 yield return new WaitForEndOfFrame();
             }
-            Release(keyboard.rightArrowKey);
+            Release(_keyboard.rightArrowKey);
             yield return new WaitForSeconds(1f);
             
             //Then
