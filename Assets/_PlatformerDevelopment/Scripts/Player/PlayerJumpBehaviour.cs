@@ -28,7 +28,6 @@ namespace PersonalDevelopment
                 _canJump = false;
                 _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
             }
-            print("Jump: " + context.phase.ToString());
         }
 
         #endregion
