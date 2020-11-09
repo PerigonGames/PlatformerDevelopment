@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace PersonalDevelopment
@@ -13,7 +14,7 @@ namespace PersonalDevelopment
         
         // Movement 
         [SerializeField] private float _movementSpeed = 5f;
-        private Vector2 Axis2D { get; set; }
+        private int _axisSingle = 0;
 
         #region mono
         
@@ -25,7 +26,7 @@ namespace PersonalDevelopment
             _bindings = new PlayerCharacterBindings();
         }
         
-        void OnEnable()
+        private void OnEnable()
         {
             _bindings.Player.Move.performed += OnMovePressed;
             _bindings.Player.Move.canceled += OnMoveCancelled;
@@ -50,7 +51,7 @@ namespace PersonalDevelopment
 
         private void Movement()
         {
-            var movement = new Vector3(Axis2D.x, 0 ,0) * _movementSpeed * Time.fixedDeltaTime;
+            var movement = new Vector3(_axisSingle, 0 ,0) * _movementSpeed * Time.fixedDeltaTime;
             _rigidbody.MovePosition(transform.position + movement);
         }
         #endregion
@@ -58,12 +59,12 @@ namespace PersonalDevelopment
         #region Delegate
         private void OnMovePressed(InputAction.CallbackContext context)
         {
-            Axis2D = context.ReadValue<Vector2>();
+            _axisSingle = (int) context.ReadValue<Single>();
         }
 
         private void OnMoveCancelled(InputAction.CallbackContext context)
         {
-            Axis2D = Vector3.zero;
+            _axisSingle = 0;
         }
         #endregion
     }
