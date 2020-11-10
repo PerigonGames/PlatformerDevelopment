@@ -253,49 +253,9 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 5e49397b-868e-4a9a-b622-49b6248f5559
     m_ActionName: UI/TrackedDeviceOrientation
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1410163244}
-        m_TargetAssemblyTypeName: PersonalDevelopment.PlayerMovementBehaviour, Scripts
-        m_MethodName: OnMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: f304f315-c19a-4d75-b2f3-3d2fe2cb9b8b
-    m_ActionName: Player_Keys/Move[/Keyboard/leftArrow,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4795651832562201028}
-        m_TargetAssemblyTypeName: PersonalDevelopment.PlayerJumpBehaviour, Scripts
-        m_MethodName: OnJumpPressed
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: f6250242-6060-4b88-8d21-3381f8f57ade
-    m_ActionName: Player_Keys/Jump[/Keyboard/upArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ae050452-a2cf-4708-ba3f-51c759d7a9d6
-    m_ActionName: Player_Keys/Melee[/Keyboard/slash]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 60df356a-d88a-4f7d-9a6e-1429f355c7c5
-    m_ActionName: Player_Keys/Fire[/Keyboard/period]
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Keyboard&Mouse
-  m_DefaultActionMap: Player_WASD
+  m_DefaultControlScheme: Keyboard&Mouse_Keys
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &1410163244
