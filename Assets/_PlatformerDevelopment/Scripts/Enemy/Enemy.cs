@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace PersonalDevelopment
 {
@@ -9,31 +8,87 @@ namespace PersonalDevelopment
         Attack
     }
     
-    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(BoxCollider))]
     public abstract class Enemy : MonoBehaviour
     {
+        [SerializeField] protected BoxCollider _detectionCollider = null;
+        
         protected EnemyState _state = EnemyState.Patrol;
-        protected BoxCollider2D _detectionCollider = null;
-        protected bool _playerInRange = false;
-
-        private Vector3 _detectionColliderSize;
+        protected bool _canAttack = false;
+        protected GameObject _player;
 
         protected virtual void Setup()
         {
-            _detectionCollider = GetComponent<BoxCollider2D>();
-            _detectionColliderSize = new Vector3(_detectionCollider.size.x, _detectionCollider.size.y, 0);
             _state = EnemyState.Patrol;
         }
 
+        protected abstract void Attack();
+
+        protected virtual void Patrol()
+        {
+            Debug.Log("Patrolling");
+        }
+        
+        #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            Gizmos.color = _playerInRange ? Color.red : Color.blue;
-            Gizmos.DrawWireCube(transform.position, _detectionColliderSize);
+            Gizmos.color = _state == EnemyState.Attack ? Color.red : Color.blue;
+            Gizmos.DrawWireCube(transform.position, _detectionCollider.size);
+
+            if (_canAttack && _player != null)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawLine(transform.position, _player.transform.position);
+            }
+        }
+        #endif
+        
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                _state = EnemyState.Attack;
+                _player = other.gameObject;
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                _state = EnemyState.Patrol;
+                _canAttack = false;
+                _player = null;
+            }
         }
 
         private void Awake()
         {
             Setup();
+        }
+
+        private void Update()
+        {
+            switch (_state)
+            {
+                case EnemyState.Patrol:
+                {
+                    Patrol();
+                    break;
+                }
+                case EnemyState.Attack:
+                {
+                    Attack();
+                    break;
+                }
+                default:
+                {
+                    Patrol();
+                    break;
+                }
+            }
+
         }
     }
 }
