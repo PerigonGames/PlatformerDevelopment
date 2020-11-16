@@ -1,4 +1,5 @@
-﻿using Vector3 = UnityEngine.Vector3;
+﻿using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 namespace PersonalDevelopment
 {
@@ -55,6 +56,7 @@ namespace PersonalDevelopment
         {
             var destination = OriginalPosition + GetDirection();
             _destinationXPosition = destination.x;
+            Debug.Log(_destinationXPosition);
         }
 
         private bool CanChangeDirections(Vector3 currentPosition)

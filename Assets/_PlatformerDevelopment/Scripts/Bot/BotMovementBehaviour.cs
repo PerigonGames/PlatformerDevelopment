@@ -26,7 +26,7 @@ namespace PersonalDevelopment
             _botMovement = new BotMovement(transform.position, _moveDistance, _willMoveLeftFirst, Time.fixedDeltaTime);
         }
 
-        private void OnDisable()
+        private void OnDisable()    
         {
             _botMovement = null;
         }

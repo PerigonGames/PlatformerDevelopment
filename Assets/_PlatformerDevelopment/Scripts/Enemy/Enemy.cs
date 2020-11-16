@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace PersonalDevelopment
 {
@@ -9,16 +10,26 @@ namespace PersonalDevelopment
     }
     
     [RequireComponent(typeof(BoxCollider))]
+    [RequireComponent(typeof(Rigidbody))]
     public abstract class Enemy : MonoBehaviour
     {
-        [SerializeField] protected BoxCollider _detectionCollider = null;
+        protected BoxCollider _detectionCollider = null;
+        protected Rigidbody _rigidBody = null;
         
         protected EnemyState _state = EnemyState.Patrol;
         protected bool _canAttack = false;
         protected GameObject _player;
 
+        [SerializeField] private float _moveDistance = 5f;
+        [SerializeField] private float _moveSpeed = 5f;
+        [SerializeField] private bool _willMoveLeftFirst = false;
+
+        private BotMovement _botMovement = null;
+        
         protected virtual void Setup()
         {
+            _detectionCollider = GetComponent<BoxCollider>();
+            _rigidBody = GetComponentInParent<Rigidbody>();
             _state = EnemyState.Patrol;
         }
 
@@ -26,14 +37,19 @@ namespace PersonalDevelopment
 
         protected virtual void Patrol()
         {
-            Debug.Log("Patrolling");
+            Vector3 destination = _botMovement.GetDestination(transform.position, _moveSpeed);
+            _rigidBody.MovePosition(destination);
+            _botMovement.UpdateDestinationIfNeeded(transform.position);
         }
         
         #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            Gizmos.color = _state == EnemyState.Attack ? Color.red : Color.blue;
-            Gizmos.DrawWireCube(transform.position, _detectionCollider.size);
+            if (_detectionCollider != null)
+            {
+                Gizmos.color = _state == EnemyState.Attack ? Color.red : Color.blue;
+                Gizmos.DrawWireCube(transform.position, _detectionCollider.size);
+            }
 
             if (_canAttack && _player != null)
             {
@@ -42,8 +58,9 @@ namespace PersonalDevelopment
             }
         }
         #endif
-        
 
+        #region PlayerDetection
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -63,12 +80,27 @@ namespace PersonalDevelopment
             }
         }
 
+        #endregion
+
+
+        #region Mono
+
         private void Awake()
         {
             Setup();
         }
 
-        private void Update()
+        private void OnEnable()
+        {
+            _botMovement = new BotMovement(transform.position, _moveDistance, _willMoveLeftFirst, Time.fixedDeltaTime);
+        }
+
+        private void OnDisable()
+        {
+            _botMovement = null;
+        }
+
+        private void FixedUpdate()
         {
             switch (_state)
             {
@@ -88,7 +120,9 @@ namespace PersonalDevelopment
                     break;
                 }
             }
-
         }
+
+        #endregion
+        
     }
 }

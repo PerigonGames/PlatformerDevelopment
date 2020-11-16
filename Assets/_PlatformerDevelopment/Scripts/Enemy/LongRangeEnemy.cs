@@ -7,10 +7,8 @@ namespace PersonalDevelopment
         protected override void Attack()
         {
             _canAttack = CanHitPlayer();
-
-            Debug.Log("The player can Attack? " + _canAttack);
-            //Add Shooting Mechanics here
             
+            //Add Shooting Mechanics here
         }
 
         private bool CanHitPlayer()
@@ -21,12 +19,9 @@ namespace PersonalDevelopment
             {
                 Vector3 directionToPlayer = _player.transform.position - transform.position;
 
-                if (Physics.Raycast(transform.position, directionToPlayer, out hit, Mathf.Infinity))
+                if (Physics.Raycast(transform.position, directionToPlayer, out hit, Mathf.Infinity) && hit.collider.CompareTag("Player"))
                 {
-                    if (hit.collider.CompareTag("Player"))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             
