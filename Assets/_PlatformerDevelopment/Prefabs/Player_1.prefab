@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5552387451139534038}
   - component: {fileID: 5552387451139534032}
   - component: {fileID: 5552387451139534039}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 88ae4730b75142440a9e4fe36478356a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -90,13 +90,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5552387451706625524}
+  - component: {fileID: 8151269406562756843}
   - component: {fileID: 5552387451706625513}
   - component: {fileID: 5552387451706625512}
   - component: {fileID: 5552387451706625514}
   - component: {fileID: 1410163244}
   - component: {fileID: 4795651832562201028}
-  m_Layer: 0
-  m_Name: Player
+  m_Layer: 8
+  m_Name: Player_1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,6 +118,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8151269406562756843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5552387451706625519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc63222e5e11a144d8924f194a619b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &5552387451706625513
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -254,8 +267,8 @@ MonoBehaviour:
     m_ActionId: 5e49397b-868e-4a9a-b622-49b6248f5559
     m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Keyboard&Mouse_Keys
-  m_DefaultActionMap: Player
+  m_DefaultControlScheme: Keyboard&Mouse_WASD
+  m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &1410163244
