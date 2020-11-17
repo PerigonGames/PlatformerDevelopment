@@ -50,7 +50,8 @@ namespace PersonalDevelopment
                 Gizmos.color = _state == EnemyState.Attack ? Color.red : Color.blue;
                 Gizmos.DrawWireCube(transform.position, _detectionCollider.size);
             }
-
+            
+            // Draw a line to player if enemy can detect them and is not blocked by another collider
             if (_canAttack && _player != null)
             {
                 Gizmos.color = Color.green;
