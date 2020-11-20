@@ -227,7 +227,7 @@ namespace PersonalDevelopment
             ""actions"": [
                 {
                     ""name"": ""Navigate"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""c5ce30b3-3e41-4fc7-bd35-956fc04dd7c9"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -235,15 +235,15 @@ namespace PersonalDevelopment
                 },
                 {
                     ""name"": ""Submit"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""1481a553-d72e-4571-b080-662046c895ef"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
                     ""name"": ""Cancel"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""b38a8b2a-9ba3-4127-9fd4-fdb24b458fac"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

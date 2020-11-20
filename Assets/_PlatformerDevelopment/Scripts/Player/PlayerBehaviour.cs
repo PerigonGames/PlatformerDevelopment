@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace PersonalDevelopment
 {
@@ -12,7 +14,24 @@ namespace PersonalDevelopment
         }
         
         private Rigidbody _rigidbody = null;
+        private PlayerInput _playerInput = null;
+
+        [SerializeField] private GameObject[] _playerModels = null;
+        
         private PlayerState _state = PlayerState.Menu;
+
+        private PlayerInput Input
+        {
+            get
+            {
+                if (_playerInput == null)
+                {
+                    _playerInput = GetComponent<PlayerInput>();
+                }
+
+                return _playerInput;
+            }
+        }
         
         private PlayerState State
         {
@@ -24,10 +43,21 @@ namespace PersonalDevelopment
             }
         }
 
+        public void SetPlayerModel()
+        {
+            _playerModels[0].SetActive(false);
+            _playerModels[1].SetActive(false);
+            _playerModels[Input.playerIndex].SetActive(true);
+        }
+
 
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+        }
+
+        private void OnEnable()
+        {
             State = PlayerState.Menu;
         }
 
