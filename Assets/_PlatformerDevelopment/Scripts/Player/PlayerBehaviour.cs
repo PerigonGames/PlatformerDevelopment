@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,18 +8,10 @@ namespace PersonalDevelopment
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerBehaviour : MonoBehaviour
     {
-        private enum PlayerState
-        {
-            Menu,
-            Game
-        }
-        
         private Rigidbody _rigidbody = null;
         private PlayerInput _playerInput = null;
 
-        [SerializeField] private GameObject[] _playerModels = null;
-        
-        private PlayerState _state = PlayerState.Menu;
+        [SerializeField] private List<GameObject> _playerModels = null;
 
         private PlayerInput Input
         {
@@ -32,24 +25,18 @@ namespace PersonalDevelopment
                 return _playerInput;
             }
         }
-        
-        private PlayerState State
-        {
-            get => _state;
-            set
-            {
-                _state = value;
-                OnStateSet();
-            }
-        }
 
         public void SetPlayerModel()
         {
-            _playerModels[0].SetActive(false);
-            _playerModels[1].SetActive(false);
+            DisablePlayerModels();
             _playerModels[Input.playerIndex].SetActive(true);
         }
 
+        public void SetupPlayer()
+        {
+            //TODO - Set player position
+            _rigidbody.isKinematic = false;
+        }
 
         private void Awake()
         {
@@ -58,31 +45,20 @@ namespace PersonalDevelopment
 
         private void OnEnable()
         {
-            State = PlayerState.Menu;
-        }
-
-        private void OnStateSet()
-        {
-            switch (State)
-            {
-                case PlayerState.Menu:
-                    OnMenuStateSet();
-                    break;
-                case PlayerState.Game:
-                    OnGameStateSet();
-                    break;
-            }
-        }
-
-        private void OnMenuStateSet()
-        {
             _rigidbody.isKinematic = true;
         }
 
-        private void OnGameStateSet()
+        private void OnDisable()
         {
-            _rigidbody.isKinematic = false;
+            DisablePlayerModels();
         }
 
+        private void DisablePlayerModels()
+        {
+            foreach (var model in _playerModels)
+            {
+                model.SetActive(false);
+            }
+        }
     }
 }
