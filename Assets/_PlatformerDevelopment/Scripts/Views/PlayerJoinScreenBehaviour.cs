@@ -86,32 +86,44 @@ namespace PersonalDevelopment
             {
                 _inputManager.DisableJoining();
             }
-            
+
+            PlayerInput playerInput = null;
             var lowercase = obj.control.name.ToLower();
             if (lowercase == "enter")
             {
                 if (isKeysJoined) return;
                 
-                var playerInput = InputManager.JoinPlayer();
+                playerInput = InputManager.JoinPlayer();
                 playerInput.SwitchCurrentControlScheme(KeyboardAndMouseKeys, Keyboard.current);
                 playerInput.SwitchCurrentActionMap("UI");
                 isKeysJoined = true;
-                return;
-            }
-
-            if (lowercase == "space")
+            } 
+            else if (lowercase == "space")
             {
                 if (isWASDJoined) return;
                 
-                var playerInput = InputManager.JoinPlayer();
+                playerInput = InputManager.JoinPlayer();
                 playerInput.SwitchCurrentControlScheme(KeyboardAndMouseWASD, Keyboard.current);
                 playerInput.SwitchCurrentActionMap("UI");
                 isWASDJoined = true;
-                return;
+
+            }
+            else
+            {
+                var controllerInput = InputManager.JoinPlayer(pairWithDevice: obj.control.device);
+                controllerInput.SwitchCurrentActionMap("UI");
             }
 
-            var controllerInput = InputManager.JoinPlayer(pairWithDevice: obj.control.device);
-            controllerInput.SwitchCurrentActionMap("UI");
+            StartCoroutine(PlayerInputBugFixer(playerInput));
+        }
+
+        //InputManager has some stupid bug that disabled inputs unless I turned it off and on.
+        //https://stackoverflow.com/questions/63540724/errors-after-deleting-an-action-using-unitys-new-input-system
+        private IEnumerator PlayerInputBugFixer(PlayerInput input)
+        {
+            input.gameObject.SetActive(false);
+            yield return new WaitForEndOfFrame();
+            input.gameObject.SetActive(true);
         }
         #endregion
     }
