@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,6 +34,8 @@ namespace PersonalDevelopment
         public void SetupPlayer()
         {
             //TODO - Set player position
+            //TODO - Add Player Movement Behaviour
+            //TODO - Add Player Jump Behaviour
             _rigidbody.isKinematic = false;
         }
 

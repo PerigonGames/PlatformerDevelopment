@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +8,9 @@ namespace PersonalDevelopment
     {
         private const string KeyboardAndMouseWASD = "Keyboard&Mouse_WASD";
         private const string KeyboardAndMouseKeys = "Keyboard&Mouse_Keys";
+        private const string InputMappingNameUI = "UI";
+        private const string KeyboardSubmitKeys = "enter";
+        private const string KeyboardSubmitWASD = "space";
         
         private PlayerInputManager _inputManager = null;
         [SerializeField] private PlayerSelectionBehaviour _playerOneSelection = null;
@@ -17,6 +18,9 @@ namespace PersonalDevelopment
 
         private PlayerCharacterBindings _characterBinding = null;
 
+        private bool isWASDJoined = false;
+        private bool isKeysJoined = false;
+        
         private PlayerInputManager InputManager
         {
             get
@@ -29,28 +33,12 @@ namespace PersonalDevelopment
                 return _inputManager;
             }
         }
-        
-        private void Awake()
-        {
-            _characterBinding = new PlayerCharacterBindings();
-            _characterBinding.UI.Submit.canceled += OnSubmitPerformed;
-            _characterBinding.UI.Submit.performed += OnSubmitPerformed;
-            _characterBinding.UI.Submit.started += OnSubmitPerformed;
-            _characterBinding.Enable();
-        }
-
-        private void OnDestroy()
-        {
-            _characterBinding.UI.Submit.canceled -= OnSubmitPerformed;
-            _characterBinding.UI.Submit.performed -= OnSubmitPerformed;
-            _characterBinding.UI.Submit.started -= OnSubmitPerformed;
-            _characterBinding.Disable();
-            _characterBinding = null;
-        }
-        
 
         private void OnEnable()
         {
+            _characterBinding = new PlayerCharacterBindings();
+            _characterBinding.UI.Submit.performed += OnSubmitPerformed;
+            _characterBinding.Enable();
             InputManager.EnableJoining();
             InputManager.onPlayerJoined += OnPlayerJoined;
         }
@@ -58,6 +46,9 @@ namespace PersonalDevelopment
 
         private void OnDisable()
         {
+            _characterBinding.UI.Submit.performed -= OnSubmitPerformed;
+            _characterBinding.Disable();
+            _characterBinding = null;
             InputManager.DisableJoining();
             InputManager.onPlayerJoined -= OnPlayerJoined;
         }
@@ -77,43 +68,40 @@ namespace PersonalDevelopment
             }
         }
 
-        private bool isWASDJoined = false;
-        private bool isKeysJoined = false;
         
         private void OnSubmitPerformed(InputAction.CallbackContext obj)
         {
             if (_inputManager.playerCount >= 2)
             {
                 _inputManager.DisableJoining();
+                return;
             }
 
             PlayerInput playerInput = null;
             var lowercase = obj.control.name.ToLower();
-            if (lowercase == "enter")
+            switch (lowercase)
             {
-                if (isKeysJoined) return;
-                
-                playerInput = InputManager.JoinPlayer();
-                playerInput.SwitchCurrentControlScheme(KeyboardAndMouseKeys, Keyboard.current);
-                playerInput.SwitchCurrentActionMap("UI");
-                isKeysJoined = true;
-            } 
-            else if (lowercase == "space")
-            {
-                if (isWASDJoined) return;
-                
-                playerInput = InputManager.JoinPlayer();
-                playerInput.SwitchCurrentControlScheme(KeyboardAndMouseWASD, Keyboard.current);
-                playerInput.SwitchCurrentActionMap("UI");
-                isWASDJoined = true;
-
+                case KeyboardSubmitKeys when !isKeysJoined:
+                    playerInput = InputManager.JoinPlayer();
+                    playerInput.SwitchCurrentControlScheme(KeyboardAndMouseKeys, Keyboard.current);
+                    isKeysJoined = true;
+                    break;
+                case KeyboardSubmitWASD when !isWASDJoined:
+                    playerInput = InputManager.JoinPlayer();
+                    playerInput.SwitchCurrentControlScheme(KeyboardAndMouseWASD, Keyboard.current);
+                    isWASDJoined = true;
+                    break;
+                default:
+                    InputManager.JoinPlayerFromActionIfNotAlreadyJoined(obj);
+                    break;
             }
-            else
+            
+            var allPlayers = PlayerInput.all;
+            foreach (var player in allPlayers)
             {
-                var controllerInput = InputManager.JoinPlayer(pairWithDevice: obj.control.device);
-                controllerInput.SwitchCurrentActionMap("UI");
+                player.SwitchCurrentActionMap(InputMappingNameUI);
             }
-
+            
             StartCoroutine(PlayerInputBugFixer(playerInput));
         }
 
@@ -121,9 +109,14 @@ namespace PersonalDevelopment
         //https://stackoverflow.com/questions/63540724/errors-after-deleting-an-action-using-unitys-new-input-system
         private IEnumerator PlayerInputBugFixer(PlayerInput input)
         {
-            input.gameObject.SetActive(false);
-            yield return new WaitForEndOfFrame();
-            input.gameObject.SetActive(true);
+            if (input != null)
+            {
+                input.gameObject.SetActive(false);
+                yield return new WaitForEndOfFrame();
+                input.gameObject.SetActive(true);
+            }
+
+            yield return null;
         }
         #endregion
     }

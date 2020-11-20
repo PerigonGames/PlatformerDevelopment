@@ -227,23 +227,23 @@ namespace PersonalDevelopment
             ""actions"": [
                 {
                     ""name"": ""Navigate"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""c5ce30b3-3e41-4fc7-bd35-956fc04dd7c9"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
                     ""name"": ""Submit"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""1481a553-d72e-4571-b080-662046c895ef"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
                     ""name"": ""Cancel"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""b38a8b2a-9ba3-4127-9fd4-fdb24b458fac"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -251,7 +251,7 @@ namespace PersonalDevelopment
                 },
                 {
                     ""name"": ""Point"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""9edbdd38-8739-459d-ac9f-4533be5fa3bf"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -259,7 +259,7 @@ namespace PersonalDevelopment
                 },
                 {
                     ""name"": ""Click"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""f986a1ae-3363-4d3d-b48d-dfb916c51f3a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -267,7 +267,7 @@ namespace PersonalDevelopment
                 },
                 {
                     ""name"": ""ScrollWheel"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""9c5e5910-82dc-41e3-8c44-36424117cdd6"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -275,7 +275,7 @@ namespace PersonalDevelopment
                 },
                 {
                     ""name"": ""MiddleClick"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""97736e75-df5f-495c-8c0d-7fd2073219c9"",
                     ""expectedControlType"": """",
                     ""processors"": """",
@@ -283,7 +283,7 @@ namespace PersonalDevelopment
                 },
                 {
                     ""name"": ""RightClick"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""4deb3bd1-05ec-4795-88c2-bfc6d7d5e461"",
                     ""expectedControlType"": """",
                     ""processors"": """",
@@ -291,7 +291,7 @@ namespace PersonalDevelopment
                 },
                 {
                     ""name"": ""TrackedDevicePosition"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""1674919f-da8f-4f21-b877-317325f87af9"",
                     ""expectedControlType"": ""Vector3"",
                     ""processors"": """",
@@ -299,7 +299,7 @@ namespace PersonalDevelopment
                 },
                 {
                     ""name"": ""TrackedDeviceOrientation"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""5e49397b-868e-4a9a-b622-49b6248f5559"",
                     ""expectedControlType"": ""Quaternion"",
                     ""processors"": """",
