@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7790112897779668193}
   - component: {fileID: 7790112897779668198}
+  - component: {fileID: 9177893011271153222}
   - component: {fileID: 7790112897779668192}
   - component: {fileID: 7790112897779668195}
   - component: {fileID: 7790112897779668194}
@@ -47,8 +48,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9134c4178fee649dc93c0df1ae258cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveDistance: 3
+  _moveDistance: 8
   _moveSpeed: 1
+  _willMoveLeftFirst: 0
+--- !u!114 &9177893011271153222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790112897779668205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5bc31c6a6b3aa4b9b5fd48d85faa0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pushBackHorizontal: 150
+  _pushBackVertical: 100
 --- !u!33 &7790112897779668192
 MeshFilter:
   m_ObjectHideFlags: 0

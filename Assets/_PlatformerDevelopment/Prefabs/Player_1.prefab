@@ -175,8 +175,8 @@ GameObject:
   - component: {fileID: 5552387451706625513}
   - component: {fileID: 5552387451706625512}
   - component: {fileID: 5552387451706625514}
-  - component: {fileID: 1410163244}
   - component: {fileID: 4795651832562201028}
+  - component: {fileID: 1929337070}
   m_Layer: 8
   m_Name: Player_1
   m_TagString: Player
@@ -215,6 +215,7 @@ MonoBehaviour:
   _playerModels:
   - {fileID: 5552387451139534037}
   - {fileID: 5067650125113085542}
+  _movementSpeed: 8
 --- !u!136 &5552387451706625513
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -273,7 +274,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1410163244}
+      - m_Target: {fileID: 1929337070}
         m_TargetAssemblyTypeName: PersonalDevelopment.PlayerMovementBehaviour, Scripts
         m_MethodName: OnMove
         m_Mode: 0
@@ -329,10 +330,6 @@ MonoBehaviour:
     m_ActionName: UI/Point[/Mouse/position,/Pen/position]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: c33a6f84-51ac-4dec-9144-eb0b1b1fd4cf
-    m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 9c5e5910-82dc-41e3-8c44-36424117cdd6
     m_ActionName: UI/ScrollWheel[/Mouse/scroll]
   - m_PersistentCalls:
@@ -351,24 +348,15 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 5e49397b-868e-4a9a-b622-49b6248f5559
     m_ActionName: UI/TrackedDeviceOrientation
-  m_NeverAutoSwitchControlSchemes: 0
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f986a1ae-3363-4d3d-b48d-dfb916c51f3a
+    m_ActionName: UI/Click[/Mouse/leftButton,/Mouse/leftButton]
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard&Mouse_WASD
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1410163244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5552387451706625519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec58fb1ee26cf4e50b35d7037dbecb2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _movementSpeed: 8
 --- !u!114 &4795651832562201028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,3 +370,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpForce: 240
+--- !u!114 &1929337070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5552387451706625519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec58fb1ee26cf4e50b35d7037dbecb2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coolDownTimer: 0.75
