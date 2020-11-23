@@ -10,10 +10,34 @@ namespace PersonalDevelopment
     {
         // Components
         private Rigidbody _rigidbody = null;
-        
+
         // Movement 
-        [SerializeField] private float _movementSpeed = 5f;
+        private float _movementSpeed = 5f;
+        [SerializeField] private float _coolDownTimer = 1.0f;
+
         private int _axisSingle = 0;
+        private float _hurtCoolDown = 0;
+
+        private bool CanMove()
+        {
+            return _hurtCoolDown <= 0;
+        }
+
+        public void Initialize(Rigidbody rigidbody, float movementSpeed)
+        {
+            _movementSpeed = movementSpeed;
+            _rigidbody = rigidbody;
+        }
+        
+        public void OnPlayerHurt()
+        {
+            ResetCoolDown();
+        }
+
+        private void ResetCoolDown()
+        {
+            _hurtCoolDown = _coolDownTimer;
+        }
 
         #region PlayerInputInspector
 
@@ -35,18 +59,29 @@ namespace PersonalDevelopment
         }
 
         #endregion
-        
-        #region mono
-        // Start is called before the first frame update
-        private void Awake()
+
+        private void HurtCoolDownTimer()
         {
-            // This will never be null, since this won't even compile without RigidBody on this gameobject
-            _rigidbody = GetComponent<Rigidbody>();
+            if (_hurtCoolDown > 0)
+            {
+                _hurtCoolDown -= Time.fixedDeltaTime;
+            }
         }
         
+        #region mono
+
+        private void OnEnable()
+        {
+            _hurtCoolDown = _coolDownTimer;
+        }
+
         private void FixedUpdate()
         {
-            Movement();
+            HurtCoolDownTimer();
+            if (CanMove())
+            {
+                Movement();
+            }
         }
 
         #endregion
@@ -69,5 +104,7 @@ namespace PersonalDevelopment
             _axisSingle = 0;
         }
         #endregion
+
+       
     }
 }

@@ -32,6 +32,11 @@ namespace PersonalDevelopment
 
         #endregion
         
+        public void OnPlayerHurt()
+        {
+            _canJump = false;
+        }
+        
         #region Mono
         private void Awake()
         {
@@ -47,5 +52,7 @@ namespace PersonalDevelopment
         }
 
         #endregion
+
+
     }
 }
