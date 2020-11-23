@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_PlatformerDevelopment/Scenes/Sandbox/Bot_Melee_Sandbox.unity
+    guid: a1f984a619bac4b10b9a4cac71065d4e
+  - enabled: 1
     path: Assets/_PlatformerDevelopment/Scenes/Sandbox/CharacterControl_Multiplayer_Sandbox.unity
     guid: 18c7e456803394ae2871afdb206ff3ca
   - enabled: 1
