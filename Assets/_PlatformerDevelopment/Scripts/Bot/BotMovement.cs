@@ -55,8 +55,8 @@ namespace PersonalDevelopment
         private void UpdateDestination()
         {
             var destination = OriginalPosition + GetDirection();
-            _destinationXPosition = destination.x;
-            Debug.Log(_destinationXPosition);
+            var direction = _isMovingLeft ? -1 : 1;
+            _destinationXPosition = destination.x * direction;
         }
 
         private bool CanChangeDirections(Vector3 currentPosition)

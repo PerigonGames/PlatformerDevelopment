@@ -2,40 +2,33 @@
 
 namespace PersonalDevelopment
 {
-    [RequireComponent(typeof(Rigidbody))]
     public class BotMovementBehaviour : MonoBehaviour
     {
         // Components
         private Rigidbody _rigidbody = null;
         
         // Properties
-        [SerializeField] private float _moveDistance = 5f;
-        [SerializeField] private float _moveSpeed = 5f;
-        [SerializeField] private bool _willMoveLeftFirst = false;
-
+        private EnemyProperties _properties = null;
         private BotMovement _botMovement = null;
+
+        public void Initialize(Rigidbody rigidbody, EnemyProperties properties)
+        {
+            _rigidbody = rigidbody;
+            _properties = properties;            
+            _botMovement = new BotMovement(transform.position, _properties.MoveDistance, _properties.WillMoveLeftFirst, Time.fixedDeltaTime);
+        }
         
-        #region Mono
-        private void Awake()
+        public void MovementUpdate()
         {
-            _rigidbody = GetComponent<Rigidbody>();
-        }
-
-        private void OnEnable()
-        {
-            _botMovement = new BotMovement(transform.position, _moveDistance, _willMoveLeftFirst, Time.fixedDeltaTime);
-        }
-
-        private void OnDisable()    
-        {
-            _botMovement = null;
-        }
-
-        private void FixedUpdate()
-        {
-            var destination = _botMovement.GetDestination(transform.position, _moveSpeed);
+            var destination = _botMovement.GetDestination(transform.position, _properties.MoveSpeed);
             _rigidbody.MovePosition(destination);
             _botMovement.UpdateDestinationIfNeeded(transform.position);
+        }
+        
+        #region Mono
+        private void OnDestroy()    
+        {
+            _botMovement = null;
         }
         #endregion
         
