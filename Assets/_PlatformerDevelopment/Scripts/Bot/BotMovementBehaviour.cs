@@ -8,19 +8,19 @@ namespace PersonalDevelopment
         private Rigidbody _rigidbody = null;
         
         // Properties
-        private EnemyProperties _properties = null;
+        private IEnemyProperties _properties = null;
         private BotMovement _botMovement = null;
 
-        public void Initialize(Rigidbody rigidbody, EnemyProperties properties)
+        public void Initialize(Rigidbody rigidbody, IEnemyProperties properties, bool moveLeftFirst)
         {
             _rigidbody = rigidbody;
             _properties = properties;            
-            _botMovement = new BotMovement(transform.position, _properties.MoveDistance, _properties.WillMoveLeftFirst, Time.fixedDeltaTime);
+            _botMovement = new BotMovement(transform.position, _properties.MoveDistance(), moveLeftFirst, Time.fixedDeltaTime);
         }
         
         public void MovementUpdate()
         {
-            var destination = _botMovement.GetDestination(transform.position, _properties.MoveSpeed);
+            var destination = _botMovement.GetDestination(transform.position, _properties.MoveSpeed());
             _rigidbody.MovePosition(destination);
             _botMovement.UpdateDestinationIfNeeded(transform.position);
         }

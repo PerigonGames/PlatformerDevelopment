@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/_PlatformerDevelopment/Scenes/Sandbox/CharacterControl_Sandbox.unity
     guid: ad3ec80422e0546b6b591b831c980f79
   - enabled: 1
+    path: Assets/_PlatformerDevelopment/Scenes/Sandbox/Bot_LongRange_Sandbox.unity
+    guid: 9f248c6d60911084283920d3fcaf50b3
+  - enabled: 1
     path: Assets/_PlatformerDevelopment/Scenes/Menu.unity
     guid: 2d1171401dd7741d3bb96520aac44ca7
   - enabled: 1

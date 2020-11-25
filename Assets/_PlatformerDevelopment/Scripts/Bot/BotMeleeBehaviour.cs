@@ -1,9 +1,12 @@
-﻿namespace PersonalDevelopment
+﻿using UnityEngine;
+
+namespace PersonalDevelopment
 {
     public class BotMeleeBehaviour : Enemy
     {
         private BotMovementBehaviour _botMovement = null;
         private BotMeleeAttackBehaviour _botMelee = null;
+        [SerializeField] private bool _moveLeftFirst = false;
         
         protected override void Patrol()
         {
@@ -24,7 +27,7 @@
 
         private void Start()
         {
-            _botMovement.Initialize(_rigidBody, _properties);
+            _botMovement.Initialize(_rigidBody, _properties, _moveLeftFirst);
             _botMelee.Initialize(_properties);
         }
     }

@@ -4,7 +4,7 @@ namespace PersonalDevelopment
 {
     public class BotMeleeAttackBehaviour : MonoBehaviour
     {
-        private EnemyProperties _properties = null;
+        private IEnemyProperties _properties = null;
         
         public void Initialize(EnemyProperties properties)
         {
@@ -37,8 +37,8 @@ namespace PersonalDevelopment
             var direction = IsLeftHandSide(playerBody.gameObject) ? Vector3.left : Vector3.right;
             playerBody.velocity = Vector3.zero;
             playerBody.angularVelocity = Vector3.zero;
-            playerBody.AddForce(direction * _properties.PushBackHorizontal, ForceMode.Impulse);
-            playerBody.AddForce(Vector3.up * _properties.PushBackVertical, ForceMode.Impulse);
+            playerBody.AddForce(direction * _properties.PushBackHorizontal(), ForceMode.Impulse);
+            playerBody.AddForce(Vector3.up * _properties.PushBackVertical(), ForceMode.Impulse);
         }
 
         private void DamagePlayerIfNeeded(PlayerBehaviour player)
