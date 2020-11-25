@@ -70,11 +70,6 @@ namespace PersonalDevelopment
         
         #region mono
 
-        private void OnEnable()
-        {
-            _hurtCoolDown = _coolDownTimer;
-        }
-
         private void FixedUpdate()
         {
             HurtCoolDownTimer();

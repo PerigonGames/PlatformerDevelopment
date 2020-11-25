@@ -29,7 +29,7 @@ namespace Tests
             var bot = GameObject.Find("Bot_Melee");
             bot.GetComponent<BotMovementBehaviour>().enabled = false;
             bot.transform.position = botStartingPosition;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1f);
             
             Assert.Less(player.transform.position.x, playerStartingPosition.x, "Player should be pushed back");
         }
@@ -45,7 +45,7 @@ namespace Tests
             var bot = GameObject.Find("Bot_Melee");
             bot.GetComponent<BotMovementBehaviour>().enabled = false;
             bot.transform.position = botStartingPosition;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1f);
             
             Assert.Greater(player.transform.position.x, playerStartingPosition.x, "Player should be pushed back");
         }

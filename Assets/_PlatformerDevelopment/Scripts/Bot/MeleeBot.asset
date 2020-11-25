@@ -15,5 +15,5 @@ MonoBehaviour:
   _moveDistance: 5
   _moveSpeed: 0
   _willMoveLeftFirst: 0
-  _pushBackHorizontal: 50
-  _pushBackVertical: 50
+  _pushBackHorizontal: 100
+  _pushBackVertical: 100
