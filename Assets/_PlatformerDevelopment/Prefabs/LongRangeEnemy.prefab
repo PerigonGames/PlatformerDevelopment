@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _properties: {fileID: 11400000, guid: 49697a28992809a4f99e5e3badd4d0e0, type: 2}
+  _moveLeftFirst: 0
+  _rangedDetection: 10
 --- !u!114 &4668630680938530314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +65,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9134c4178fee649dc93c0df1ae258cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveLeftFirst: 1
 --- !u!114 &934151029930526846
 MonoBehaviour:
   m_ObjectHideFlags: 0

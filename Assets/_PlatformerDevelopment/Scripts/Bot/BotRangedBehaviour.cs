@@ -11,6 +11,7 @@ namespace PersonalDevelopment
         private BotMeleeAttackBehaviour _botMeleeAttack = null;
         
         [SerializeField] private bool _moveLeftFirst = false;
+        [SerializeField] private float _rangedDetection = 3f;
 
         protected override void Patrol()
         {
@@ -34,7 +35,7 @@ namespace PersonalDevelopment
 
         private void Start()
         {
-            _botRangedAttack.Initialize(_detectionCollider);
+            _botRangedAttack.Initialize(_detectionCollider, _rangedDetection);
             _botMovement.Initialize(_rigidBody, _properties, _moveLeftFirst);
             _botMeleeAttack.Initialize(_properties);
         }

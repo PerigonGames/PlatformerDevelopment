@@ -13,9 +13,10 @@ namespace PersonalDevelopment
         private GameObject _player = null;
         private bool _isGizmoTriggerEntered = false;
 
-        public void Initialize(BoxCollider collider)
+        public void Initialize(BoxCollider collider, float attackDetectionRange)
         {
             _detectionCollider = collider;
+            _detectionCollider.size = new Vector3(attackDetectionRange, 1, 1);
         }
         
         public void Attack()

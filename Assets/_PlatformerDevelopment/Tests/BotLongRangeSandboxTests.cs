@@ -40,10 +40,12 @@ namespace Tests
             PlayerInputSetup();
             
             // When
+            var attackRangeDetection = 3;
             _playerOne.transform.position = new Vector3(-2, 1, 0);
             var bot = GameObject.FindObjectOfType<BotMovementBehaviour>();
             bot.gameObject.transform.position = new Vector3(3, 1, 0);
             bot.Initialize(bot.GetComponent<Rigidbody>(), new DummyEnemyProperties(), true);
+            bot.GetComponent<BotRangedAttackBehaviour>().Initialize(bot.GetComponent<BoxCollider>(), attackRangeDetection);
 
             //Then
             yield return new WaitForSeconds(2f);
@@ -61,12 +63,16 @@ namespace Tests
             PlayerInputSetup();
             
             // When
+            var attackRangeDetection = 3;
+            var moveDistance = 2;
             _playerOne.transform.position = new Vector3(-2, 1, 0);
             var bot = GameObject.FindObjectOfType<BotMovementBehaviour>();
             bot.gameObject.transform.position = new Vector3(0, 1, 0);
             var properties = new DummyEnemyProperties();
-            properties.moveDistance = 2;
+            properties.moveDistance = moveDistance;
             bot.Initialize(bot.GetComponent<Rigidbody>(), properties, false);
+            bot.GetComponent<BotRangedAttackBehaviour>().Initialize(bot.GetComponent<BoxCollider>(), attackRangeDetection);
+
 
             //Then
             var botPositionBefore = bot.gameObject.transform;
