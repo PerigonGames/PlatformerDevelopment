@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ad0f95e1bee14d46a3edc752962f513, type: 3}
-  m_Name: LongRangedBot
+  m_Name: MeleeBot
   m_EditorClassIdentifier: 
-  _moveDistance: 0.1
-  _moveSpeed: 1
+  _moveDistance: 5
+  _moveSpeed: 0
   _willMoveLeftFirst: 0
-  _pushBackHorizontal: 3
-  _pushBackVertical: 3
+  _pushBackHorizontal: 50
+  _pushBackVertical: 50
