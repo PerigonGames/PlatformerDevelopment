@@ -1,4 +1,5 @@
-﻿using Vector3 = UnityEngine.Vector3;
+﻿using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 namespace PersonalDevelopment
 {
@@ -30,7 +31,8 @@ namespace PersonalDevelopment
         /// <returns>Next Position of bot</returns>
         public Vector3 GetDestination(Vector3 currentPosition, float moveSpeed)
         {
-            return new Vector3(currentPosition.x + _destinationXPosition * moveSpeed * FixedDeltaTime, currentPosition.y, currentPosition.z);
+            var direction = _isMovingLeft ? -1 : 1;
+            return new Vector3(currentPosition.x + direction * moveSpeed * FixedDeltaTime, currentPosition.y, currentPosition.z);
         }
         
         /// <summary>

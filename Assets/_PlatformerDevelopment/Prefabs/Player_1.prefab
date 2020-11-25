@@ -172,11 +172,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5552387451706625524}
   - component: {fileID: 8151269406562756843}
+  - component: {fileID: 4795651832562201028}
+  - component: {fileID: 1929337070}
   - component: {fileID: 5552387451706625513}
   - component: {fileID: 5552387451706625512}
   - component: {fileID: 5552387451706625514}
-  - component: {fileID: 4795651832562201028}
-  - component: {fileID: 1929337070}
   m_Layer: 8
   m_Name: Player_1
   m_TagString: Player
@@ -216,6 +216,32 @@ MonoBehaviour:
   - {fileID: 5552387451139534037}
   - {fileID: 5067650125113085542}
   _movementSpeed: 8
+--- !u!114 &4795651832562201028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5552387451706625519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d0c515dfbc8f4236abf7af6b2d26182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpForce: 240
+--- !u!114 &1929337070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5552387451706625519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec58fb1ee26cf4e50b35d7037dbecb2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coolDownTimer: 0.75
 --- !u!136 &5552387451706625513
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -309,7 +335,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
     m_ActionId: 2fbd39ee-c074-4053-9ec5-990ce11d58bb
     m_ActionName: Player/Jump[/Keyboard/w,/Keyboard/upArrow]
   - m_PersistentCalls:
@@ -353,33 +379,7 @@ MonoBehaviour:
     m_ActionId: f986a1ae-3363-4d3d-b48d-dfb916c51f3a
     m_ActionName: UI/Click[/Mouse/leftButton,/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Keyboard&Mouse_WASD
-  m_DefaultActionMap: UI
+  m_DefaultControlScheme: Keyboard&Mouse_Keys
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4795651832562201028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5552387451706625519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d0c515dfbc8f4236abf7af6b2d26182, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _jumpForce: 240
---- !u!114 &1929337070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5552387451706625519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec58fb1ee26cf4e50b35d7037dbecb2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _coolDownTimer: 0.75
