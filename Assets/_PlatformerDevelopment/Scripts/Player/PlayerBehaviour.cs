@@ -12,6 +12,7 @@ namespace PersonalDevelopment
         private PlayerInput _playerInput = null;
         private PlayerMovementBehaviour _movementBehaviour = null;
         private PlayerJumpBehaviour _jumpBehaviour = null;
+        private PlayerAnimationBehaviour _animationBehaviour = null;
 
         [SerializeField] private List<GameObject> _playerModels = null;
 
@@ -31,10 +32,13 @@ namespace PersonalDevelopment
             }
         }
 
-        public void SetPlayerModel()
+        public void SetPlayerModelInCharacterSelection()
         {
             DisablePlayerModels();
             _playerModels[Input.playerIndex].SetActive(true);
+            SetComponent(false);
+            transform.rotation = Quaternion.Euler(0, 90, 0);
+            _animationBehaviour.SetTauntParameter(true);
         }
 
         public void SetupPlayerForGame()
@@ -42,9 +46,11 @@ namespace PersonalDevelopment
             //TODO - Set player position
             //TODO - Add Player Jump Behaviour
             
-            _movementBehaviour.Initialize(_rigidbody, _movementSpeed);
+            _movementBehaviour.Initialize(_rigidbody, _movementSpeed, _animationBehaviour);
             Input.SwitchCurrentActionMap("Player");
             _rigidbody.isKinematic = false;
+            _animationBehaviour.SetTauntParameter(false);
+            SetComponent(true);
         }
 
         public void HurtPlayer()
@@ -57,6 +63,7 @@ namespace PersonalDevelopment
         {
             _movementBehaviour = GetComponent<PlayerMovementBehaviour>();
             _jumpBehaviour = GetComponent<PlayerJumpBehaviour>();
+            _animationBehaviour = GetComponent<PlayerAnimationBehaviour>();
             _rigidbody = GetComponent<Rigidbody>();
         }
 
@@ -70,6 +77,19 @@ namespace PersonalDevelopment
             DisablePlayerModels();
         }
 
+        private void SetComponent(bool isEnabled)
+        {
+            if (_movementBehaviour != null)
+            {
+                _movementBehaviour.enabled = isEnabled;
+            }
+
+            if (_jumpBehaviour != null)
+            {
+                _jumpBehaviour.enabled = isEnabled;
+            }
+        }
+        
         private void DisablePlayerModels()
         {
             foreach (var model in _playerModels)

@@ -72,7 +72,7 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1
-    height: 1
+    height: 1.1
 --- !u!114 &478820263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,7 +732,7 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1
-    height: 1
+    height: 1.1
 --- !u!1 &4362896611237646795
 GameObject:
   m_ObjectHideFlags: 0
