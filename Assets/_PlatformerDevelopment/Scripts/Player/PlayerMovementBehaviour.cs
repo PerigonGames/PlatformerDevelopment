@@ -10,6 +10,7 @@ namespace PersonalDevelopment
     {
         // Components
         private Rigidbody _rigidbody = null;
+        private PlayerAnimationBehaviour _animation = null;
 
         // Movement 
         private float _movementSpeed = 5f;
@@ -23,8 +24,9 @@ namespace PersonalDevelopment
             return _hurtCoolDown <= 0;
         }
 
-        public void Initialize(Rigidbody rigidbody, float movementSpeed)
+        public void Initialize(Rigidbody rigidbody, float movementSpeed, PlayerAnimationBehaviour animation = null)
         {
+            _animation = animation;
             _movementSpeed = movementSpeed;
             _rigidbody = rigidbody;
         }
@@ -76,6 +78,7 @@ namespace PersonalDevelopment
             if (CanMove())
             {
                 Movement();
+                RotateBodyIfNeeded();
             }
         }
 
@@ -88,18 +91,42 @@ namespace PersonalDevelopment
             var movement = new Vector3(_axisSingle, 0 ,0) * _movementSpeed * Time.fixedDeltaTime;
             _rigidbody.MovePosition(transform.position + movement);
         }
+
+        private void RotateBodyIfNeeded()
+        {
+            if (_axisSingle == 1)
+            {
+                transform.rotation = Quaternion.identity;
+            }
+            else if (_axisSingle == -1)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+        }
         
         private void OnMovePerformed(InputAction.CallbackContext context)
         {
             _axisSingle = (int) context.ReadValue<Single>();
+            DoAnimateRunning(true);
         }
 
         private void OnMoveCancelled()
         {
             _axisSingle = 0;
+            DoAnimateRunning(false);
         }
         #endregion
+        
+        #region Animation
 
+        private void DoAnimateRunning(bool isRunning)
+        {
+            if (_animation)
+            {
+                _animation.SetRunParameter(isRunning);
+            }
+        }
+        #endregion
        
     }
 }

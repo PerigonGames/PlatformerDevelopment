@@ -12,7 +12,7 @@ namespace PersonalDevelopment
         public void Initialize(PlayerInput input)
         {
             _input = input;
-            _input.GetComponent<PlayerBehaviour>().SetPlayerModel();
+            _input.GetComponent<PlayerBehaviour>().SetPlayerModelInCharacterSelection();
             _playerSelectionGameObject.SetActive(true);
             _playerJoinText.SetActive(false);
             SetPlayerModelPosition();
