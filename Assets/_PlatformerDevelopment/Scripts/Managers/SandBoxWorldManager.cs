@@ -11,6 +11,9 @@ namespace PersonalDevelopment
             var players = PlayerInput.all;
             foreach (var player in players)
             {
+                var child = player.transform.GetComponentInChildren<Animator>();
+                // The correct animator has to be placed into PlayerBehaviour
+                player.GetComponent<PlayerAnimationBehaviour>().Initialize(child);
                 player.GetComponent<PlayerBehaviour>().SetupPlayerForGame();
             }
         }

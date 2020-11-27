@@ -8,16 +8,27 @@ namespace PersonalDevelopment
         private const string IsRunningAnimationParameter = "IsRunning";
         private const string IsTauntingAnimationParameter = "IsTaunting";
 
-        [SerializeField] private Animator _animator = null;
+        private Animator _animator = null;
+
+        public void Initialize(Animator animator)
+        {
+            _animator = animator;
+        }
 
         public void SetRunParameter(bool isRunning)
         {
-            _animator.SetBool(IsRunningAnimationParameter, isRunning);
+            if (_animator)
+            {
+                _animator.SetBool(IsRunningAnimationParameter, isRunning);
+            }
         }
 
         public void SetTauntParameter(bool isTaunting)
         {
-            _animator.SetBool(IsTauntingAnimationParameter, isTaunting);
+            if (_animator)
+            {
+                _animator.SetBool(IsTauntingAnimationParameter, isTaunting);
+            }
         }
     }
 

@@ -61,6 +61,40 @@ namespace Tests
         }
         
         [UnityTest]
+        public IEnumerator Test_PressLeftArrowKeyWhileFacingRight_Equal_180YRotation()
+        {
+            //Given
+            PlayerInputSetup();
+            _player.gameObject.transform.rotation = Quaternion.identity;
+
+            //When
+            Press(_keyboard.leftArrowKey);
+            yield return new WaitForSeconds(0.5f);
+            
+            //Then
+            var rotationAfter = _player.gameObject.transform.rotation.eulerAngles.y;
+            Assert.AreEqual(180f, rotationAfter, "Player rotation should be 180 from pressing left arrow key");
+            yield return null;
+        }
+        
+        [UnityTest]
+        public IEnumerator Test_PressRightArrowKeyWhileFacingLeft_Equal_0YRotation()
+        {
+            //Given
+            PlayerInputSetup();
+            _player.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+
+            //When
+            Press(_keyboard.rightArrowKey);
+            yield return new WaitForSeconds(0.5f);
+            
+            //Then
+            var rotationAfter = _player.gameObject.transform.rotation;
+            Assert.AreEqual(Quaternion.identity, rotationAfter, "Player rotation should be 180 from pressing left arrow key");
+            yield return null;
+        }
+        
+        [UnityTest]
         public IEnumerator Test_PressRightArrowKey_Higher_XPosition()
         {
             //Given 
