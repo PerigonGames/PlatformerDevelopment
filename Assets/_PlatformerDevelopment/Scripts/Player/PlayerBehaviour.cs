@@ -35,7 +35,9 @@ namespace PersonalDevelopment
         public void SetPlayerModelInCharacterSelection()
         {
             DisablePlayerModels();
-            _playerModels[Input.playerIndex].SetActive(true);
+            var playerModel = _playerModels[Input.playerIndex];
+            playerModel.SetActive(true);
+            _animationBehaviour.Initialize(playerModel.GetComponent<Animator>());
             SetComponent(false);
             transform.rotation = Quaternion.Euler(0, 90, 0);
             _animationBehaviour.SetTauntParameter(true);
@@ -44,13 +46,13 @@ namespace PersonalDevelopment
         public void SetupPlayerForGame()
         {
             //TODO - Set player position
-            //TODO - Add Player Jump Behaviour
+            //TODO - Initialize Player Jump Behaviour
             
             _movementBehaviour.Initialize(_rigidbody, _movementSpeed, _animationBehaviour);
-            Input.SwitchCurrentActionMap("Player");
-            _rigidbody.isKinematic = false;
             _animationBehaviour.SetTauntParameter(false);
             SetComponent(true);
+            Input.SwitchCurrentActionMap("Player");
+            _rigidbody.isKinematic = false;
         }
 
         public void HurtPlayer()
