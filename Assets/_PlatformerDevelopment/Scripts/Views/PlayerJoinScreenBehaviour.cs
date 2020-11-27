@@ -49,8 +49,11 @@ namespace PersonalDevelopment
             _characterBinding.UI.Submit.performed -= OnSubmitPerformed;
             _characterBinding.Disable();
             _characterBinding = null;
-            InputManager.DisableJoining();
-            InputManager.onPlayerJoined -= OnPlayerJoined;
+            if (InputManager)
+            {
+                InputManager.DisableJoining();
+                InputManager.onPlayerJoined -= OnPlayerJoined;
+            }
         }
 
 
