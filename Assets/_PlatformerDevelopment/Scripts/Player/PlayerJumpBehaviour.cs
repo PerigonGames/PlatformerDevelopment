@@ -24,10 +24,11 @@ namespace PersonalDevelopment
         /// <param name="context"></param>
         public void OnJumpPressed(InputAction.CallbackContext context)
         {
-            if (!IsPlayerAnimationAttacking() && _canJump && context.phase == InputActionPhase.Performed)
+            if (!_animator.IsAttacking() && _canJump && context.phase == InputActionPhase.Performed)
             {
                 _canJump = false;
                 _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+                _animator.SetJumpParameter(true);
             }
         }
 
@@ -44,17 +45,13 @@ namespace PersonalDevelopment
             _canJump = false;
         }
 
-        private bool IsPlayerAnimationAttacking()
-        {
-            return _animator.IsShooting() || _animator.IsKicking();
-        }
-
         #region Mono
         private void OnCollisionEnter(Collision other)
         {
             if (other.gameObject.CompareTag(FloorTag))
             {
                 _canJump = true;
+                _animator.SetJumpParameter(false);
             }
         }
         #endregion
