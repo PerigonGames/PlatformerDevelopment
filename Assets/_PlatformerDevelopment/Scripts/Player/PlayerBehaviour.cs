@@ -13,8 +13,10 @@ namespace PersonalDevelopment
         private PlayerMovementBehaviour _movementBehaviour = null;
         private PlayerJumpBehaviour _jumpBehaviour = null;
         private PlayerAnimationBehaviour _animationBehaviour = null;
+        private PlayerMeleeAttackBehaviour _meleeAttackBehaviour = null;
 
         [SerializeField] private List<GameObject> _playerModels = null;
+        private GameObject _chosenPlayerModel = null;
 
         [Title("Character Properties - Move to ScriptableObject")] [SerializeField]
         private float _movementSpeed = 8f;
@@ -35,9 +37,9 @@ namespace PersonalDevelopment
         public void SetPlayerModelInCharacterSelection()
         {
             DisablePlayerModels();
-            var playerModel = _playerModels[Input.playerIndex];
-            playerModel.SetActive(true);
-            _animationBehaviour.Initialize(playerModel.GetComponent<Animator>());
+            _chosenPlayerModel = _playerModels[Input.playerIndex];
+            _chosenPlayerModel.SetActive(true);
+            _animationBehaviour.Initialize(_chosenPlayerModel.GetComponent<Animator>());
             SetComponent(false);
             transform.rotation = Quaternion.Euler(0, 90, 0);
             _animationBehaviour.SetTauntParameter(true);
@@ -46,9 +48,10 @@ namespace PersonalDevelopment
         public void SetupPlayerForGame()
         {
             //TODO - Set player position
-            //TODO - Initialize Player Jump Behaviour
             
             _movementBehaviour.Initialize(_rigidbody, _movementSpeed, _animationBehaviour);
+            _jumpBehaviour.Initialize(_rigidbody, _animationBehaviour);
+            _meleeAttackBehaviour.Initialize(_animationBehaviour, _chosenPlayerModel);
             _animationBehaviour.SetTauntParameter(false);
             SetComponent(true);
             Input.SwitchCurrentActionMap("Player");
@@ -63,6 +66,7 @@ namespace PersonalDevelopment
 
         private void Awake()
         {
+            _meleeAttackBehaviour = GetComponent<PlayerMeleeAttackBehaviour>();
             _movementBehaviour = GetComponent<PlayerMovementBehaviour>();
             _jumpBehaviour = GetComponent<PlayerJumpBehaviour>();
             _animationBehaviour = GetComponent<PlayerAnimationBehaviour>();

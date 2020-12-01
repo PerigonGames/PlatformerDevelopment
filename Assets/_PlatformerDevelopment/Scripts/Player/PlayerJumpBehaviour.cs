@@ -11,6 +11,7 @@ namespace PersonalDevelopment
         
         // Components
         private Rigidbody _rigidbody = null;
+        private PlayerAnimationBehaviour _animator = null;
         
         // Fields
         [SerializeField] private float _jumpForce = 10f;
@@ -23,7 +24,7 @@ namespace PersonalDevelopment
         /// <param name="context"></param>
         public void OnJumpPressed(InputAction.CallbackContext context)
         {
-            if (_canJump && context.phase == InputActionPhase.Performed)
+            if (!_animator.IsKicking() && _canJump && context.phase == InputActionPhase.Performed)
             {
                 _canJump = false;
                 _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
@@ -31,18 +32,19 @@ namespace PersonalDevelopment
         }
 
         #endregion
+
+        public void Initialize(Rigidbody rigidbody, PlayerAnimationBehaviour animator)
+        {
+            _animator = animator;
+            _rigidbody = rigidbody;
+        }
         
         public void OnPlayerHurt()
         {
             _canJump = false;
         }
-        
+
         #region Mono
-        private void Awake()
-        {
-            _rigidbody = GetComponent<Rigidbody>();
-        }
-        
         private void OnCollisionEnter(Collision other)
         {
             if (other.gameObject.CompareTag(FloorTag))

@@ -21,7 +21,7 @@ namespace PersonalDevelopment
 
         private bool CanMove()
         {
-            return _hurtCoolDown <= 0;
+            return _hurtCoolDown <= 0 && !_animation.IsKicking();
         }
 
         public void Initialize(Rigidbody rigidbody, float movementSpeed, PlayerAnimationBehaviour animation = null)
