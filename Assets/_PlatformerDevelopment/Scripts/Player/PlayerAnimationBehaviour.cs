@@ -10,6 +10,7 @@ namespace PersonalDevelopment
         private const string IsJumpingAnimationParameter = "IsJumping";
         private const string DoMeleeParameter = "DoMelee";
         private const string DoShootParameter = "DoShoot";
+        private const string HurtParameter = "Hurt";
 
         private Animator _animator = null;
 
@@ -57,6 +58,14 @@ namespace PersonalDevelopment
             if (_animator)
             {
                 _animator.SetTrigger(DoShootParameter);
+            }
+        }
+
+        public void Hurt()
+        {
+            if (_animator && !_animator.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
+            {
+                _animator.SetTrigger(HurtParameter);
             }
         }
         
