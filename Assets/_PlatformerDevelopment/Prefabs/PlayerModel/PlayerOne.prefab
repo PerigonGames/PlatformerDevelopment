@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1929337070}
   - component: {fileID: 6548951538220160158}
   - component: {fileID: 5286718404445128146}
+  - component: {fileID: 3679263310216266737}
   - component: {fileID: 5552387451706625513}
   - component: {fileID: 5552387451706625512}
   - component: {fileID: 5552387451706625514}
@@ -106,8 +107,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ace824cc5a4204db13bacded2a2aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meleeDistance: 3
   _pushBackHorizontal: 150
+  _meleeDistance: 3
+--- !u!114 &3679263310216266737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5552387451706625519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7779cb68fee2a3744a39fb52484c642b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &5552387451706625513
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -181,7 +194,20 @@ MonoBehaviour:
     m_ActionId: d53e6b7e-1d53-45b0-ac98-d6866d029aa7
     m_ActionName: Player/Move[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3679263310216266737}
+        m_TargetAssemblyTypeName: PersonalDevelopment.PlayerLongRangeAttackBehaviour,
+          Scripts
+        m_MethodName: OnLongRangePressed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 919a78a0-66c6-47b5-b71c-069cff3d1c69
     m_ActionName: Player/Fire[/Mouse/rightButton]
   - m_PersistentCalls:
