@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 9177893011271153222}
   - component: {fileID: 7790112897779668194}
   - component: {fileID: 7790112897779668199}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bot_Melee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _properties: {fileID: 11400000, guid: ca57350697499e749861ea4225e05e4d, type: 2}
+  _moveLeftFirst: 0
 --- !u!114 &7790112897779668198
 MonoBehaviour:
   m_ObjectHideFlags: 0

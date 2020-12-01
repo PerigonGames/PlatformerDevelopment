@@ -13,8 +13,11 @@ namespace PersonalDevelopment
             {
                 var child = player.transform.GetComponentInChildren<Animator>();
                 // The correct animator has to be placed into PlayerBehaviour
-                player.GetComponent<PlayerAnimationBehaviour>().Initialize(child);
+                var playerAnimation = player.GetComponent<PlayerAnimationBehaviour>();
+                playerAnimation.Initialize(child);
                 player.GetComponent<PlayerBehaviour>().SetupPlayerForGame();
+                // Set the Player Animation and gameObject
+                player.GetComponent<PlayerMeleeAttackBehaviour>().Initialize(playerAnimation, child.gameObject);
             }
         }
     }

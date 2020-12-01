@@ -19,6 +19,11 @@ namespace PersonalDevelopment
 
         [SerializeField] protected EnemyProperties _properties = null;
 
+        public void HurtBot()
+        {
+            //TODO - What happens when the bot gets hurt
+        }
+        
         protected abstract void Patrol();
         protected abstract void Attack();
 
