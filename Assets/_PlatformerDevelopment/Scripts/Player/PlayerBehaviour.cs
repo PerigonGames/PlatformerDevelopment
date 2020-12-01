@@ -62,6 +62,7 @@ namespace PersonalDevelopment
 
         public void HurtPlayer()
         {
+            _animationBehaviour.Hurt();
             _movementBehaviour.OnPlayerHurt();
             _jumpBehaviour.OnPlayerHurt();
         }
