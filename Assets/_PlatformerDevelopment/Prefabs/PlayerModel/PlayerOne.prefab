@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meleeDistance: 3
+  _pushBackHorizontal: 150
 --- !u!136 &5552387451706625513
 CapsuleCollider:
   m_ObjectHideFlags: 0
