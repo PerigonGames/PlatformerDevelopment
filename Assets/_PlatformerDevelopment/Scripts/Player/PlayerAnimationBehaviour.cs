@@ -7,6 +7,7 @@ namespace PersonalDevelopment
     {
         private const string IsRunningAnimationParameter = "IsRunning";
         private const string IsTauntingAnimationParameter = "IsTaunting";
+        private const string IsJumpingAnimationParameter = "IsJumping";
         private const string DoMeleeParameter = "DoMelee";
         private const string DoShootParameter = "DoShoot";
 
@@ -24,6 +25,14 @@ namespace PersonalDevelopment
             if (_animator)
             {
                 _animator.SetBool(IsRunningAnimationParameter, isRunning);
+            }
+        }
+
+        public void SetJumpParameter(bool isJumping)
+        {
+            if (_animator)
+            {
+                _animator.SetBool(IsJumpingAnimationParameter, isJumping);
             }
         }
 
@@ -73,6 +82,11 @@ namespace PersonalDevelopment
             }
 
             return false;
+        }
+
+        public bool IsAttacking()
+        {
+            return IsShooting() || IsKicking();
         }
         
         #endregion
