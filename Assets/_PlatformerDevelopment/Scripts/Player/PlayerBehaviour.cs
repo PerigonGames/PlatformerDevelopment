@@ -14,6 +14,7 @@ namespace PersonalDevelopment
         private PlayerJumpBehaviour _jumpBehaviour = null;
         private PlayerAnimationBehaviour _animationBehaviour = null;
         private PlayerMeleeAttackBehaviour _meleeAttackBehaviour = null;
+        private PlayerLongRangeAttackBehaviour _longRangeAttackBehaviour = null;
 
         [SerializeField] private List<GameObject> _playerModels = null;
         private GameObject _chosenPlayerModel = null;
@@ -52,6 +53,7 @@ namespace PersonalDevelopment
             _movementBehaviour.Initialize(_rigidbody, _movementSpeed, _animationBehaviour);
             _jumpBehaviour.Initialize(_rigidbody, _animationBehaviour);
             _meleeAttackBehaviour.Initialize(_animationBehaviour, _chosenPlayerModel);
+            _longRangeAttackBehaviour.Initialize(_animationBehaviour, _chosenPlayerModel);
             _animationBehaviour.SetTauntParameter(false);
             SetComponent(true);
             Input.SwitchCurrentActionMap("Player");
@@ -66,6 +68,7 @@ namespace PersonalDevelopment
 
         private void Awake()
         {
+            _longRangeAttackBehaviour = GetComponent<PlayerLongRangeAttackBehaviour>();
             _meleeAttackBehaviour = GetComponent<PlayerMeleeAttackBehaviour>();
             _movementBehaviour = GetComponent<PlayerMovementBehaviour>();
             _jumpBehaviour = GetComponent<PlayerJumpBehaviour>();

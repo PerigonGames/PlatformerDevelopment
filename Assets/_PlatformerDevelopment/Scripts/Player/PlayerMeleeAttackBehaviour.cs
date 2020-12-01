@@ -5,10 +5,13 @@ namespace PersonalDevelopment
 {
     public class PlayerMeleeAttackBehaviour : MonoBehaviour
     {
-        [SerializeField] private float _meleeDistance = 3f;
+        // Dependencies
         private PlayerAnimationBehaviour _animation = null;
         private GameObject _playerModel = null;
+        
+        //Properties
         [SerializeField] private float _pushBackHorizontal = 100f;
+        [SerializeField] private float _meleeDistance = 3f;
         
         //Fields
         private bool _canMelee = false;

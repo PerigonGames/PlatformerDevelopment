@@ -24,7 +24,7 @@ namespace PersonalDevelopment
         /// <param name="context"></param>
         public void OnJumpPressed(InputAction.CallbackContext context)
         {
-            if (!_animator.IsKicking() && _canJump && context.phase == InputActionPhase.Performed)
+            if (!IsPlayerAnimationAttacking() && _canJump && context.phase == InputActionPhase.Performed)
             {
                 _canJump = false;
                 _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
@@ -44,6 +44,11 @@ namespace PersonalDevelopment
             _canJump = false;
         }
 
+        private bool IsPlayerAnimationAttacking()
+        {
+            return _animator.IsShooting() || _animator.IsKicking();
+        }
+
         #region Mono
         private void OnCollisionEnter(Collision other)
         {
@@ -52,7 +57,6 @@ namespace PersonalDevelopment
                 _canJump = true;
             }
         }
-
         #endregion
 
 

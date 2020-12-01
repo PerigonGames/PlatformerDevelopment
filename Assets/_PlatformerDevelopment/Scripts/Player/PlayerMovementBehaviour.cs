@@ -21,7 +21,7 @@ namespace PersonalDevelopment
 
         private bool CanMove()
         {
-            return _hurtCoolDown <= 0 && !_animation.IsKicking();
+            return _hurtCoolDown <= 0 && !IsPlayerAnimationAttacking();
         }
 
         public void Initialize(Rigidbody rigidbody, float movementSpeed, PlayerAnimationBehaviour animation = null)
@@ -35,6 +35,12 @@ namespace PersonalDevelopment
         {
             ResetCoolDown();
         }
+        
+        private bool IsPlayerAnimationAttacking()
+        {
+            return _animation.IsShooting() || _animation.IsKicking();
+        }
+
 
         private void ResetCoolDown()
         {
