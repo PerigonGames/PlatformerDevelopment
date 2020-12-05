@@ -33,4 +33,21 @@
             return _pushBackVertical;
         }
     }
+    
+    
+    public class DummyPlayerClass : ICharacterProperties
+    {
+        public int _health = 0;
+        public float _speed = 3;
+        
+        public int Health()
+        {
+            return _health;
+        }
+
+        public float MoveSpeed()
+        {
+            return _speed;
+        }
+    }
 }

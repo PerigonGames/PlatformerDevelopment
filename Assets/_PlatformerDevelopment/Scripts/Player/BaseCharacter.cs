@@ -7,15 +7,11 @@ namespace PersonalDevelopment
         private int _health = 0;
 
         public event Action OnDeath;
-
+        public int Health => _health;
+        
         public BaseCharacter(ICharacterProperties properties)
         {
             _health = properties.Health();
-        }
-        
-        private bool IsDead()
-        {
-            return _health <= 0;
         }
 
         public void HitCharacter()
@@ -25,6 +21,11 @@ namespace PersonalDevelopment
             {
                 OnDeath();
             }
+        }
+
+        private bool IsDead()
+        {
+            return _health <= 0;
         }
     }
 }
