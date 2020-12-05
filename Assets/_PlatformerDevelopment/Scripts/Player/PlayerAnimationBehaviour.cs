@@ -11,6 +11,7 @@ namespace PersonalDevelopment
         private const string DoMeleeParameter = "DoMelee";
         private const string DoShootParameter = "DoShoot";
         private const string HurtParameter = "Hurt";
+        private const string DeathParameter = "IsDead";
 
         private Animator _animator = null;
 
@@ -66,6 +67,14 @@ namespace PersonalDevelopment
             if (_animator && !_animator.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
             {
                 _animator.SetTrigger(HurtParameter);
+            }
+        }
+
+        public void SetDead(bool isDead)
+        {
+            if (_animator)
+            {
+                _animator.SetBool(DeathParameter, isDead);
             }
         }
         

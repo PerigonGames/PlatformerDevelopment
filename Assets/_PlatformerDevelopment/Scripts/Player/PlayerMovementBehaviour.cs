@@ -24,10 +24,10 @@ namespace PersonalDevelopment
             return _hurtCoolDown <= 0 && !_animation.IsAttacking();
         }
 
-        public void Initialize(Rigidbody rigidbody, float movementSpeed, PlayerAnimationBehaviour animation = null)
+        public void Initialize(Rigidbody rigidbody, IPlayerProperties properties, PlayerAnimationBehaviour animation = null)
         {
             _animation = animation;
-            _movementSpeed = movementSpeed;
+            _movementSpeed = properties.MoveSpeed();
             _rigidbody = rigidbody;
         }
         

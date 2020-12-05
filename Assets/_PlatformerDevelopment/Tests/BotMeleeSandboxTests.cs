@@ -87,7 +87,7 @@ namespace Tests
             var player = GameObject.Find("Player_1");
             player.transform.position = playerStartingPosition;
 
-            var botProperties = new DummyProperties();
+            var botProperties = new DummyEnemyProperties();
             botProperties._moveSpeed = 0;
             var botStartingPosition = new Vector3(0, 1, 0);
             var bot = GameObject.Find("Bot_Melee");
@@ -111,7 +111,7 @@ namespace Tests
             var player = GameObject.Find("Player_1");
             player.transform.position = playerStartingPosition;
 
-            var botProperties = new DummyProperties();
+            var botProperties = new DummyEnemyProperties();
             botProperties._moveSpeed = 0;
             var botStartingPosition = new Vector3(0, 1, 0);
             var bot = GameObject.Find("Bot_Melee");
@@ -136,7 +136,7 @@ namespace Tests
             var player = GameObject.Find("Player_1");
             player.transform.position = playerStartingPosition;
 
-            var botProperties = new DummyProperties();
+            var botProperties = new DummyEnemyProperties();
             botProperties._moveSpeed = 0;
             var botStartingPosition = new Vector3(0, 1, 0);
             var bot = GameObject.Find("Bot_Melee");
@@ -152,34 +152,6 @@ namespace Tests
             Assert.Less(bot.transform.position.x, botStartingPosition.x, "Player's Melee should push bot back");
             
             yield return null;
-        }
-    }
-
-    public class DummyProperties : IEnemyProperties
-    {
-        public float _moveDistance = 5;
-        public float _moveSpeed = 5;
-        public float _pushBackHorizontal = 100;
-        public float _pushBackVertical = 100;
-        
-        public float MoveDistance()
-        {
-            return _moveDistance;
-        }
-
-        public float MoveSpeed()
-        {
-            return _moveSpeed;
-        }
-
-        public float PushBackHorizontal()
-        {
-            return _pushBackHorizontal;
-        }
-
-        public float PushBackVertical()
-        {
-            return _pushBackVertical;
         }
     }
 }

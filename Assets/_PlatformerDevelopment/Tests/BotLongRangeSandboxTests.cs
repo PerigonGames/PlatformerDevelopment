@@ -69,7 +69,7 @@ namespace Tests
             var bot = GameObject.FindObjectOfType<BotMovementBehaviour>();
             bot.gameObject.transform.position = new Vector3(0, 1, 0);
             var properties = new DummyEnemyProperties();
-            properties.moveDistance = moveDistance;
+            properties._moveDistance = moveDistance;
             bot.Initialize(bot.GetComponent<Rigidbody>(), properties, false);
             bot.GetComponent<BotRangedAttackBehaviour>().Initialize(bot.GetComponent<BoxCollider>(), attackRangeDetection);
 
@@ -86,34 +86,6 @@ namespace Tests
             
             //Therefore
             Assert.AreNotEqual(xPositionBefore, xPositionAfter, "X position should be the same after detecting the player and staying still");
-        }
-
-        private class DummyEnemyProperties : IEnemyProperties
-        {
-            public float moveDistance = 5;
-            public float moveSpeed = 10;
-            public float pushBackHorizontal = 100;
-            public float pushBackVeritcal = 100;
-            
-            public float MoveDistance()
-            {
-                return moveDistance;
-            }
-
-            public float MoveSpeed()
-            {
-                return moveSpeed;
-            }
-
-            public float PushBackHorizontal()
-            {
-                return pushBackHorizontal;
-            }
-
-            public float PushBackVertical()
-            {
-                return pushBackVeritcal;
-            }
         }
     }
 }

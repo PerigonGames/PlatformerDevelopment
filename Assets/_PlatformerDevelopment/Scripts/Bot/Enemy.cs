@@ -11,6 +11,7 @@ namespace PersonalDevelopment
     [RequireComponent(typeof(Rigidbody))]
     public abstract class Enemy : MonoBehaviour
     {
+        private BaseCharacter _character = null;
         // Components
         protected Rigidbody _rigidBody = null;
 
@@ -21,16 +22,26 @@ namespace PersonalDevelopment
 
         public void HurtBot()
         {
+            _character.HitCharacter();
             //TODO - What happens when the bot gets hurt
         }
         
         protected abstract void Patrol();
         protected abstract void Attack();
 
+        #region Delegate
+
+        protected virtual void OnDeath()
+        {
+            
+        }
+        #endregion
+        
         #region Mono
 
         protected virtual void Awake()
         {
+            _character = new BaseCharacter(_properties);
             _rigidBody = GetComponent<Rigidbody>();
             _state = EnemyState.Patrol;
         }
