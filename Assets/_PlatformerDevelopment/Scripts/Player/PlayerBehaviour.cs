@@ -54,7 +54,7 @@ namespace PersonalDevelopment
             _movementBehaviour.Initialize(_rigidbody, _playerProperties, _animationBehaviour);
             _jumpBehaviour.Initialize(_rigidbody, _animationBehaviour);
             _meleeAttackBehaviour.Initialize(_animationBehaviour, _chosenPlayerModel);
-            _longRangeAttackBehaviour.Initialize(_animationBehaviour, _chosenPlayerModel);
+            _longRangeAttackBehaviour.Initialize(_animationBehaviour);
             _animationBehaviour.SetTauntParameter(false);
             SetComponent(true);
             Input.SwitchCurrentActionMap("Player");

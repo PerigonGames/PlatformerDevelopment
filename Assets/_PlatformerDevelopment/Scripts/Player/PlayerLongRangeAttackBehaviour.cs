@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 namespace PersonalDevelopment
 {
@@ -7,15 +10,14 @@ namespace PersonalDevelopment
     {
         // Dependencies
         private PlayerAnimationBehaviour _animation = null;
-        private GameObject _playerModel = null;
-        
+        [SerializeField] private ProjectileBehaviour _shotProjectile = null;
+
         //Properties
-        private bool _canShoot = false;
+        private bool _canShoot = true;
         
-        public void Initialize(PlayerAnimationBehaviour playerAnimation, GameObject playerModel)
+        public void Initialize(PlayerAnimationBehaviour playerAnimation)
         {
             _animation = playerAnimation;
-            _playerModel = playerModel;
         }
         
         #region PlayerInputInspector
@@ -24,16 +26,41 @@ namespace PersonalDevelopment
         {
             if (context.phase == InputActionPhase.Performed)
             {
-                _canShoot = false;
                 _animation.DoShootAttack();
-                ShootProjectile();
+                ShootProjectileIfAble();
             }
         }
         #endregion
 
+        private void ShootProjectileIfAble()
+        {
+            if (_canShoot)
+            {
+                StartCoroutine(DelayedProjectileShot());
+                _canShoot = false;
+            }
+        }
+
+        private IEnumerator DelayedProjectileShot()
+        {
+            // Time to wait for the Animation Duration
+            yield return new WaitForSeconds(_animation.ShootAnimationTime() / 2);
+            if (_animation.IsShooting())
+            {
+                ShootProjectile();
+            }
+            _canShoot = true;
+        }
+
         private void ShootProjectile()
         {
-            Debug.Log("Shoot");
+            var projectile = Instantiate(_shotProjectile.gameObject);
+            projectile.GetComponent<ProjectileBehaviour>().Initialize(!IsLookingRight(), transform.position + Vector3.up);
+        }
+
+        private bool IsLookingRight()
+        {
+            return transform.rotation == Quaternion.identity;
         }
     }
 }

@@ -13,11 +13,14 @@ namespace PersonalDevelopment
         private const string HurtParameter = "Hurt";
         private const string DeathParameter = "IsDead";
 
+        private float _hadoukenDuration = 0;
+
         private Animator _animator = null;
 
         public void Initialize(Animator animator)
         {
             _animator = animator;
+            SetupAnimationClipsTimes();
         }
 
         
@@ -48,7 +51,7 @@ namespace PersonalDevelopment
 
         public void DoMeleeAttack()
         {
-            if (_animator)
+            if (_animator && !IsJumping())
             {
                 _animator.SetTrigger(DoMeleeParameter);
             }
@@ -56,7 +59,7 @@ namespace PersonalDevelopment
 
         public void DoShootAttack()
         {
-            if (_animator)
+            if (_animator && !IsJumping())
             {
                 _animator.SetTrigger(DoShootParameter);
             }
@@ -82,7 +85,7 @@ namespace PersonalDevelopment
         
         #region Helpers
 
-        public bool IsKicking()
+        private bool IsKicking()
         {
             if (_animator)
             {
@@ -101,13 +104,41 @@ namespace PersonalDevelopment
 
             return false;
         }
+        
+        private bool IsJumping()
+        {
+            if (_animator)
+            {
+                return _animator.GetCurrentAnimatorStateInfo(0).IsName("Jump");
+            }
+
+            return false;
+        }
 
         public bool IsAttacking()
         {
             return IsShooting() || IsKicking();
         }
-        
+
+        public float ShootAnimationTime()
+        {
+            return _hadoukenDuration;
+        }
         #endregion
+
+        private void SetupAnimationClipsTimes()
+        {
+            AnimationClip[] clips = _animator.runtimeAnimatorController.animationClips;
+            foreach(AnimationClip clip in clips)
+            {
+                switch(clip.name)
+                {
+                    case "Humanoid_Hadouken":
+                        _hadoukenDuration = clip.length;
+                        break;
+                }
+            }
+        }
     }
 
 }
