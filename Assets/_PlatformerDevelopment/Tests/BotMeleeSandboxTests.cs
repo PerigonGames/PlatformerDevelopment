@@ -33,13 +33,15 @@ namespace Tests
         [UnityTest]
         public IEnumerator BotMeleePlayer_PushesBackPlayerLeft_LowerXPosition()
         {
-            var playerStartingPosition = new Vector3(-1, 0, 0);
+            var playerStartingPosition = new Vector3(-0.5f, 1, 0);
             var player = GameObject.Find("Player_1");
             player.transform.position = playerStartingPosition;
 
             var botStartingPosition = new Vector3(0, 1, 0);
             var bot = GameObject.Find("Bot_Melee");
-            bot.GetComponent<BotMovementBehaviour>().enabled = false;
+            var enemyproperties = new DummyEnemyProperties();
+            enemyproperties._moveSpeed = 0;
+            bot.GetComponent<BotMovementBehaviour>().Initialize(bot.GetComponent<Rigidbody>(), enemyproperties, false);
             bot.transform.position = botStartingPosition;
             yield return new WaitForSeconds(1f);
 
@@ -65,7 +67,7 @@ namespace Tests
         [UnityTest]
         public IEnumerator BotMeleePlayer_PushesBackPlayerHigher_HigherYPosition()
         {
-            var playerStartingPosition = new Vector3(1, 0, 0);
+            var playerStartingPosition = new Vector3(1, 1, 0);
             var player = GameObject.Find("Player_1");
             player.transform.position = playerStartingPosition;
 
@@ -83,7 +85,7 @@ namespace Tests
         {
             PlayerInputSetup();
             // When
-            var playerStartingPosition = new Vector3(-2, 0, 0);
+            var playerStartingPosition = new Vector3(-2, 1, 0);
             var player = GameObject.Find("Player_1");
             player.transform.position = playerStartingPosition;
 
@@ -107,7 +109,7 @@ namespace Tests
         {
             PlayerInputSetup();
             // When
-            var playerStartingPosition = new Vector3(2, 0, 0);
+            var playerStartingPosition = new Vector3(2, 1, 0);
             var player = GameObject.Find("Player_1");
             player.transform.position = playerStartingPosition;
 
@@ -132,7 +134,7 @@ namespace Tests
         {
             PlayerInputSetup();
             // When
-            var playerStartingPosition = new Vector3(2, 0, 0);
+            var playerStartingPosition = new Vector3(2, 1, 0);
             var player = GameObject.Find("Player_1");
             player.transform.position = playerStartingPosition;
 

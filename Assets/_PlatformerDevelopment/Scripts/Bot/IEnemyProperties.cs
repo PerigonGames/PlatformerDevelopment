@@ -5,5 +5,6 @@
         float MoveDistance();
         float PushBackHorizontal();
         float PushBackVertical();
+        float RangedAttackCoolDown();
     }
 }

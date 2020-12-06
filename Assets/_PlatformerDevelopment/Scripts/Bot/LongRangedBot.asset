@@ -17,3 +17,4 @@ MonoBehaviour:
   _pushBackHorizontal: 100
   _pushBackVertical: 100
   _health: 3
+  _rangedCoolDown: 1
