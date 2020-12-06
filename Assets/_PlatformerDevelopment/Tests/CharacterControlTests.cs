@@ -175,7 +175,7 @@ namespace Tests
             
             //Then
             var after = _player.gameObject.transform.position.y;
-            Assert.AreEqual(after, before, "Pressing Down Arrow key should have same Y Position");
+            Assert.AreEqual((int) after, (int) before, "Pressing Down Arrow key should have same Y Position");
         }
         
         [UnityTest]
@@ -199,15 +199,15 @@ namespace Tests
         {
             //Given 
             PlayerInputSetup();
-            var before = _player.gameObject.transform.position;
+            var before = _player.gameObject.transform.position.y;
             
             //When
             Press(_keyboard.upArrowKey);
             yield return new WaitForSeconds(2f);
             
             //Then
-            var after = _player.gameObject.transform.position;
-            Assert.AreEqual(after, before, "Player should be in the same position since jump and land on same position");
+            var after = _player.gameObject.transform.position.y;
+            Assert.AreEqual((int) after, (int) before, "Player should be in the same position since jump and land on same position");
         }
         
         

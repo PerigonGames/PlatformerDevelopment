@@ -55,7 +55,7 @@ namespace PersonalDevelopment
         private void ShootProjectile()
         {
             var projectile = Instantiate(_shotProjectile.gameObject);
-            projectile.GetComponent<ProjectileBehaviour>().Initialize(!IsLookingRight(), transform.position + Vector3.up);
+            projectile.GetComponent<ProjectileBehaviour>().Initialize(!IsLookingRight(), transform.position);
         }
 
         private bool IsLookingRight()

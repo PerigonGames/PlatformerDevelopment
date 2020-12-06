@@ -45,7 +45,7 @@ namespace Tests
             var bot = GameObject.FindObjectOfType<BotMovementBehaviour>();
             bot.gameObject.transform.position = new Vector3(3, 1, 0);
             bot.Initialize(bot.GetComponent<Rigidbody>(), new DummyEnemyProperties(), true);
-            bot.GetComponent<BotRangedAttackBehaviour>().Initialize(bot.GetComponent<BoxCollider>(), attackRangeDetection);
+            bot.GetComponent<BotRangedAttackBehaviour>().Initialize(bot.GetComponent<BoxCollider>(), attackRangeDetection, new DummyEnemyProperties());
 
             //Then
             yield return new WaitForSeconds(2f);
@@ -71,7 +71,7 @@ namespace Tests
             var properties = new DummyEnemyProperties();
             properties._moveDistance = moveDistance;
             bot.Initialize(bot.GetComponent<Rigidbody>(), properties, false);
-            bot.GetComponent<BotRangedAttackBehaviour>().Initialize(bot.GetComponent<BoxCollider>(), attackRangeDetection);
+            bot.GetComponent<BotRangedAttackBehaviour>().Initialize(bot.GetComponent<BoxCollider>(), attackRangeDetection, new DummyEnemyProperties());
 
 
             //Then

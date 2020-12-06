@@ -16,7 +16,8 @@ namespace PersonalDevelopment
 
         [Title("Property")] 
         [SerializeField] private int _health = 0;
-
+        [SerializeField] private float _rangedCoolDown = 0;
+        
         public int Health()
         {
             return _health;
@@ -40,6 +41,11 @@ namespace PersonalDevelopment
         public float PushBackVertical()
         {
             return _pushBackVertical;
+        }
+
+        public float RangedAttackCoolDown()
+        {
+            return _rangedCoolDown;
         }
     }
 }

@@ -46,7 +46,7 @@ namespace PersonalDevelopment
 
         private void Start()
         {
-            _botRangedAttack.Initialize(_detectionCollider, _rangedDetection);
+            _botRangedAttack.Initialize(_detectionCollider, _rangedDetection, _properties);
             _botMovement.Initialize(_rigidBody, _properties, _moveLeftFirst);
             _botMeleeAttack.Initialize(_properties);
         }

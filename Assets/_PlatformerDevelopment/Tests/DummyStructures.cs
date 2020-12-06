@@ -7,6 +7,7 @@
         public float _moveSpeed = 5;
         public float _pushBackHorizontal = 100;
         public float _pushBackVertical = 100;
+        public float _coolDown = 1;
         
         public float MoveDistance()
         {
@@ -31,6 +32,11 @@
         public float PushBackVertical()
         {
             return _pushBackVertical;
+        }
+
+        public float RangedAttackCoolDown()
+        {
+            return _coolDown;
         }
     }
     

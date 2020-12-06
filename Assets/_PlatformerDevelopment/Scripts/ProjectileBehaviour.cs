@@ -38,7 +38,19 @@ namespace PersonalDevelopment
             var hotObject = other.gameObject;
             if (hotObject.CompareTag(_enemyTag))
             {
-                hotObject.GetComponent<Enemy>().HurtBot();
+                var enemy = hotObject.GetComponent<Enemy>();
+                if (enemy)
+                {
+                    enemy.HurtBot();
+                    return;
+                }
+
+                var player = hotObject.GetComponent<PlayerBehaviour>();
+                if (player)
+                {
+                    player.HurtPlayer();
+                    return;
+                }
             }
         }
     }
