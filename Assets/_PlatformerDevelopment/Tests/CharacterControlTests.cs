@@ -222,7 +222,7 @@ namespace Tests
             PressAndRelease(_keyboard.upArrowKey);
             yield return new WaitForSeconds(0.25f);
             Press(_keyboard.rightArrowKey);
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 80; i++)
             {
                 yield return new WaitForEndOfFrame();
             }

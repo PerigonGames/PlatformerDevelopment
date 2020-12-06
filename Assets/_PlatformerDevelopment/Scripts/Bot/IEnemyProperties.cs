@@ -1,9 +1,8 @@
 ﻿namespace PersonalDevelopment
 {
-    public interface IEnemyProperties
-    {
+    public interface IEnemyProperties : ICharacterProperties
+    { 
         float MoveDistance();
-        float MoveSpeed();
         float PushBackHorizontal();
         float PushBackVertical();
     }

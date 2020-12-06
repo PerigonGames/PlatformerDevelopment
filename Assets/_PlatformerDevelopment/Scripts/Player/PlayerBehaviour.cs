@@ -15,13 +15,14 @@ namespace PersonalDevelopment
         private PlayerAnimationBehaviour _animationBehaviour = null;
         private PlayerMeleeAttackBehaviour _meleeAttackBehaviour = null;
         private PlayerLongRangeAttackBehaviour _longRangeAttackBehaviour = null;
+        private BaseCharacter _player = null;
 
         [SerializeField] private List<GameObject> _playerModels = null;
         private GameObject _chosenPlayerModel = null;
 
-        [Title("Character Properties - Move to ScriptableObject")] [SerializeField]
-        private float _movementSpeed = 8f;
-
+        [Title("Character Properties - Move to ScriptableObject")] 
+        [SerializeField] private PlayerProperties _playerProperties = null;
+        
         private PlayerInput Input
         {
             get
@@ -50,7 +51,7 @@ namespace PersonalDevelopment
         {
             //TODO - Set player position
             
-            _movementBehaviour.Initialize(_rigidbody, _movementSpeed, _animationBehaviour);
+            _movementBehaviour.Initialize(_rigidbody, _playerProperties, _animationBehaviour);
             _jumpBehaviour.Initialize(_rigidbody, _animationBehaviour);
             _meleeAttackBehaviour.Initialize(_animationBehaviour, _chosenPlayerModel);
             _longRangeAttackBehaviour.Initialize(_animationBehaviour, _chosenPlayerModel);
@@ -65,10 +66,12 @@ namespace PersonalDevelopment
             _animationBehaviour.Hurt();
             _movementBehaviour.OnPlayerHurt();
             _jumpBehaviour.OnPlayerHurt();
+            _player.HitCharacter();
         }
 
         private void Awake()
         {
+            _player = new BaseCharacter(_playerProperties);
             _longRangeAttackBehaviour = GetComponent<PlayerLongRangeAttackBehaviour>();
             _meleeAttackBehaviour = GetComponent<PlayerMeleeAttackBehaviour>();
             _movementBehaviour = GetComponent<PlayerMovementBehaviour>();
@@ -80,12 +83,29 @@ namespace PersonalDevelopment
         private void OnEnable()
         {
             _rigidbody.isKinematic = true;
+            if (_player != null)
+            {
+                _player.OnDeath += OnPlayerDeath;
+            }
         }
 
         private void OnDisable()
         {
             DisablePlayerModels();
+            if (_player != null)
+            {
+                _player.OnDeath -= OnPlayerDeath;
+            }
         }
+
+        #region Delegate
+        private void OnPlayerDeath()
+        {
+            //TODO Animation
+            _playerInput.DeactivateInput();
+            _animationBehaviour.SetDead(true);
+        }
+        #endregion
 
         private void SetComponent(bool isEnabled)
         {

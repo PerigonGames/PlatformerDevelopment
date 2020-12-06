@@ -23,6 +23,11 @@ namespace PersonalDevelopment
         {
             //Add Shooting Mechanics here
         }
+
+        public void DisableRangedAttack()
+        {
+            _detectionCollider.enabled = false;
+        }
         
         #region PlayerDetection
         

@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ad0f95e1bee14d46a3edc752962f513, type: 3}
-  m_Name: LongRangedBot
+  m_Script: {fileID: 11500000, guid: f43dd0d55465c594dadcb3f925b35fbf, type: 3}
+  m_Name: PlayerProperty
   m_EditorClassIdentifier: 
-  _moveDistance: 0.5
-  _moveSpeed: 1
-  _pushBackHorizontal: 100
-  _pushBackVertical: 100
+  _moveSpeed: 8
+  _jumpForce: 8
   _health: 3

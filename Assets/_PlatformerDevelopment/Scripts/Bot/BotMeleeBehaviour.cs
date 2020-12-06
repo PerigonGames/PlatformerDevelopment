@@ -18,6 +18,17 @@ namespace PersonalDevelopment
             _state = EnemyState.Patrol;
         }
 
+        protected override void Death()
+        {
+            //Nothing to do on death
+        }
+
+        protected override void OnDeath()
+        {
+            base.OnDeath();
+            _botMovement.enabled = false;
+        }
+
         protected override void Awake()
         {
             base.Awake();
