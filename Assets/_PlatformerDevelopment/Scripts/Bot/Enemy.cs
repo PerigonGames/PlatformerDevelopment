@@ -5,7 +5,8 @@ namespace PersonalDevelopment
     public enum EnemyState
     {
         Patrol,
-        Attack
+        Attack,
+        Death
     }
     
     [RequireComponent(typeof(Rigidbody))]
@@ -23,20 +24,19 @@ namespace PersonalDevelopment
         public void HurtBot()
         {
             _character.HitCharacter();
-            //TODO - What happens when the bot gets hurt
         }
         
         protected abstract void Patrol();
         protected abstract void Attack();
-
-        #region Delegate
+        protected abstract void Death();
 
         protected virtual void OnDeath()
         {
-            
+            _state = EnemyState.Death;
+            _rigidBody.isKinematic = true;
+            _rigidBody.detectCollisions = false;
         }
-        #endregion
-        
+
         #region Mono
 
         protected virtual void Awake()
@@ -45,7 +45,17 @@ namespace PersonalDevelopment
             _rigidBody = GetComponent<Rigidbody>();
             _state = EnemyState.Patrol;
         }
-        
+
+        protected virtual void OnEnable()
+        {
+            _character.OnDeath += OnDeath;
+        }
+
+        protected virtual void OnDisable()
+        {
+            _character.OnDeath -= OnDeath;
+        }
+
         private void FixedUpdate()
         {
             switch (_state)
@@ -55,6 +65,9 @@ namespace PersonalDevelopment
                     break;
                 case EnemyState.Attack:
                     Attack();
+                    break;
+                case EnemyState.Death:
+                    Death();
                     break;
             }
         }

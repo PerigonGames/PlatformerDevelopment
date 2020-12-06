@@ -44,7 +44,7 @@ namespace PersonalDevelopment
             var layerMask = 1 << LayerMask.NameToLayer("Bot");
             RaycastHit hit;
             // correct position, but the Vector3.up to shift the origin higher
-            var originPosition = _playerModel.transform.position + Vector3.up;
+            var originPosition = _playerModel.transform.position + Vector3.up * 0.25f;
             var directionToCast = _playerModel.transform.TransformDirection(Vector3.forward) * _meleeDistance;
             if (Physics.Raycast(originPosition, directionToCast, out hit, _meleeDistance, layerMask))
             {

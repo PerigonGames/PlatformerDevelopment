@@ -16,3 +16,4 @@ MonoBehaviour:
   _moveSpeed: 1
   _pushBackHorizontal: 100
   _pushBackVertical: 100
+  _health: 3

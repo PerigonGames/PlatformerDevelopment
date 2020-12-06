@@ -23,6 +23,17 @@ namespace PersonalDevelopment
             _botRangedAttack.Attack();
         }
 
+        protected override void Death()
+        {
+            // Nothing to do when on death state per FixedUpdate
+        }
+
+        protected override void OnDeath()
+        {
+            base.OnDeath();
+            _botRangedAttack.DisableRangedAttack();
+        }
+
         #region Mono
         protected override void Awake()
         {
@@ -40,8 +51,9 @@ namespace PersonalDevelopment
             _botMeleeAttack.Initialize(_properties);
         }
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             if (_botRangedAttack)
             {
                 _botRangedAttack.OnPlayerEnteredRange += OnPlayerEnteredRange;
@@ -49,10 +61,11 @@ namespace PersonalDevelopment
             }
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
+            base.OnDisable();
             _botRangedAttack.OnPlayerEnteredRange -= OnPlayerEnteredRange;
-            _botRangedAttack.OnPlayerExitRange += OnPlayerExitRange;
+            _botRangedAttack.OnPlayerExitRange -= OnPlayerExitRange;
         }
 
         #endregion
