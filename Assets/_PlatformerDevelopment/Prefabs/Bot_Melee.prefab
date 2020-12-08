@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b61688a3a53a54cabd413cfa713cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collectible: {fileID: 1434282098, guid: 5d219a7ec39819f4ab781faa11f40ae3, type: 3}
   _properties: {fileID: 11400000, guid: ca57350697499e749861ea4225e05e4d, type: 2}
   _moveLeftFirst: 0
 --- !u!114 &7790112897779668198

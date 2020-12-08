@@ -14,7 +14,6 @@ namespace PersonalDevelopment {
 
         private void OnEnable()
         {
-            transform.position = new Vector3(3, 1, 0);
             _rigidbody.AddForce(Vector3.right * 5, ForceMode.Impulse);
             _rigidbody.AddForce(Vector3.up * 10, ForceMode.Impulse);
         }
