@@ -13,6 +13,8 @@ namespace PersonalDevelopment
     public abstract class Enemy : MonoBehaviour
     {
         private BaseCharacter _character = null;
+
+        [SerializeField] private CollectibleBehaviour _collectible = null;
         // Components
         protected Rigidbody _rigidBody = null;
 
@@ -35,6 +37,7 @@ namespace PersonalDevelopment
             _state = EnemyState.Death;
             _rigidBody.isKinematic = true;
             _rigidBody.detectCollisions = false;
+            Instantiate(_collectible.gameObject, transform.position, Quaternion.identity);
         }
 
         #region Mono
