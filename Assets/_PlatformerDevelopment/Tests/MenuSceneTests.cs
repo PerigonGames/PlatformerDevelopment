@@ -38,7 +38,7 @@ namespace Tests
         public IEnumerator TestMenuSnapShotOnStart()
         {
             // Wait for 4 frames
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 50; i++)
             {
                 yield return new WaitForEndOfFrame();
             }
